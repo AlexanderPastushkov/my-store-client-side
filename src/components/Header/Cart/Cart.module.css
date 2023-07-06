@@ -1,7 +1,33 @@
 .cart {
-  width: 40px;
-  color: #fff;
+  margin: 0 auto;
+  text-align: center;
 }
-.cartItem {
-  margin-right: 15px;
+.productImg {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.productImg img {
+  width: 100%;
+  height: 100%;
+}
+.deleteBtn {
+  width: 30px;
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+.product {
+  display: grid;
+  border: 1px solid #333;
+
+  grid-template-columns: repeat(3, 1fr);
+}
+.countBtn {
+  display: inline-block;
+}
+.arrBtn {
+  width: 10px;
 }

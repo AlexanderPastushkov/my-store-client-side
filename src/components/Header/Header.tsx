@@ -1,8 +1,7 @@
-import React from "react";
-import s from "./Header.module.css";
 import logo from "../../Images/HeaderImg/LogoClothing.png";
+import CartImage from "./Cart/CartImage/CartImage.jsx";
+import s from "./Header.module.css";
 import Nav from "./Nav/Nav.jsx";
-import Cart from "./Cart/Cart.jsx";
 
 const Header = () => {
   return (
@@ -12,7 +11,7 @@ const Header = () => {
           <img className={s.logoImg} src={logo} alt="Header Logo" />
         </div>
         <Nav />
-        <Cart />
+        <CartImage />
       </div>
     </header>
   );

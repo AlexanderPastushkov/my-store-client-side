@@ -16,8 +16,8 @@ export default function HelloFormBack() {
       ) : (
         backendData.map((u) => (
           <div key={u.id}>
-            <p>{u.name}</p>
-            <p>{u.age}</p>
+            <p>title: {u.title}</p>
+            <p> price: {u.price}</p>
           </div>
         ))
       )}
