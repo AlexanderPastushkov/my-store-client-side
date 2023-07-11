@@ -8,15 +8,23 @@ export default function CartProduct({
   deleteProduct,
   increase,
   decrease,
+  changeValue,
 }) {
   const { image, title, priceTotal, price, id, count } = product;
+  const priceFormatter = new Intl.NumberFormat();
   return (
     <section className={s.product}>
       <div className={s.productImg}>
         <img src={image} alt="product-image" />
       </div>
       <div className={s.productTitle}>{title}</div>
-      <Count increase={increase} decrease={decrease} count={count} id={id} />
+      <Count
+        changeValue={changeValue}
+        increase={increase}
+        decrease={decrease}
+        count={count}
+        id={id}
+      />
       <div className={s.productPrice}>{priceTotal} usd</div>
       <div className={s.productControls}>
         <button type="button" onClick={() => deleteProduct(id)}>

@@ -5,28 +5,34 @@ import CartHeader from "./CartHeader/CartHeader";
 import CartProduct from "./CartProduct/CartProduct";
 import CartFooter from "./CartFooter/CartFooter";
 
-export default function Cart() {
-  const [backendData, setBackendData] = useState([]);
+export default function Cart({ cartItems, setCartItems, onAdd }) {
+  const [total, setTotal] = useState({
+    price: cartItems.reduce((prev, curr) => prev + +curr.priceTotal, 0),
+    count: cartItems.reduce((prev, curr) => prev + curr.count, 0),
+  });
+
   useEffect(() => {
-    fetch("/api")
-      .then((response) => response.json())
-      .then((data) => setBackendData(data));
-  }, []);
+    setTotal({
+      price: cartItems
+        .reduce((prev, curr) => prev + +curr.priceTotal, 0)
+        .toFixed(2),
+      count: cartItems.reduce((prev, curr) => prev + curr.count, 0),
+    });
+  }, [cartItems]);
 
   const deleteProduct = (id) => {
-    setBackendData((backendData) => {
-      return backendData.filter((product) => id !== product.id);
+    setCartItems((cartItems) => {
+      return cartItems.filter((product) => id !== product.id);
     });
   };
   const increase = (id) => {
-    console.log("INCREASE", id);
-    setBackendData((backendData) => {
-      return backendData.map((product) => {
+    setCartItems((cartItems) => {
+      return cartItems.map((product) => {
         if (product.id === id && product.count < 10) {
           return {
             ...product,
             count: product.count + 1,
-            priceTotal: (product.count + 1) * product.price,
+            priceTotal: ((product.count + 1) * product.price).toFixed(2),
           };
         }
         return product;
@@ -34,20 +40,36 @@ export default function Cart() {
     });
   };
   const decrease = (id) => {
-    setBackendData((backendData) => {
-      return backendData.map((product) => {
+    setCartItems((cartItems) => {
+      return cartItems.map((product) => {
         if (product.id === id && product.count > 1) {
           return {
             ...product,
             count: product.count - 1,
-            priceTotal: (product.count - 1) * product.price,
+            priceTotal: ((product.count - 1) * product.price).toFixed(2),
           };
         }
         return product;
       });
     });
   };
-  const products = backendData.map((product) => {
+
+  const changeValue = (id, value) => {
+    setCartItems((cartItems) => {
+      return cartItems.map((product) => {
+        if (product.id === id) {
+          return {
+            ...product,
+            count: value,
+            priceTotal: (value * product.price).toFixed(2),
+          };
+        }
+        return product;
+      });
+    });
+  };
+
+  const products = cartItems.map((product) => {
     return (
       <CartProduct
         deleteProduct={deleteProduct}
@@ -55,6 +77,7 @@ export default function Cart() {
         key={product.id}
         increase={increase}
         decrease={decrease}
+        changeValue={changeValue}
       />
     );
   });
@@ -63,8 +86,9 @@ export default function Cart() {
     <div className={s.cart}>
       <Title />
       {/* <CartHeader /> */}
+      {cartItems.length === 0 && <div>Cart is empty</div>}
       <div className={s.products}>{products}</div>
-      <CartFooter />
+      <CartFooter total={total} />
     </div>
   );
 }

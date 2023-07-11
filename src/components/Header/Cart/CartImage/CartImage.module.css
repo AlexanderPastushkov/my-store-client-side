@@ -4,4 +4,14 @@
 }
 .cartItem {
   margin-right: 15px;
+  position: relative;
+}
+.countCartItems {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  padding: 3px;
+  border-radius: 50%;
+  background-color: #030d7c;
 }

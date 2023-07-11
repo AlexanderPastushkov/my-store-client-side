@@ -1,0 +1,15 @@
+.product {
+  display: grid;
+  border: 1px solid #333;
+
+  grid-template-columns: repeat(3, 1fr);
+}
+.image {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+}

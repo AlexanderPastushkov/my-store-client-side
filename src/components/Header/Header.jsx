@@ -3,7 +3,7 @@ import CartImage from "./Cart/CartImage/CartImage.jsx";
 import s from "./Header.module.css";
 import Nav from "./Nav/Nav.jsx";
 
-const Header = () => {
+const Header = ({ countCartItems }) => {
   return (
     <header className={s.header}>
       <div className={s.logo_links}>
@@ -11,7 +11,7 @@ const Header = () => {
           <img className={s.logoImg} src={logo} alt="Header Logo" />
         </div>
         <Nav />
-        <CartImage />
+        <CartImage countCartItems={countCartItems} />
       </div>
     </header>
   );
