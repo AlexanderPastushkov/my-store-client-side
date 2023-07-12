@@ -16,7 +16,7 @@ export default function Catalog({ onAdd }) {
     data: [],
     total: 0,
     page: 1,
-    pageSize: 5,
+    pageSize: 10,
   });
 
   useEffect(() => {
@@ -38,24 +38,23 @@ export default function Catalog({ onAdd }) {
   }, [pageState.page, pageState.pageSize]);
 
   const onPageChanged = (pageNumber) => {
-    const fetchData = async () => {
-      setPageState((old) => ({ ...old, isLoading: true }));
-      const response = await fetch(
-        `/api/clothes?page=${pageNumber}&limit=${pageState.pageSize}`
-      );
-      const json = await response.json();
-      console.log(json);
-      setPageState((old) => ({
-        ...old,
-        isLoading: false,
-        data: json.data,
-        total: json.total,
-      }));
-    };
-    fetchData();
+    setPageState((old) => ({
+      ...old,
+      page: pageNumber,
+    }));
   };
+
   return (
-    <div className={s.products}>
+    <div>
+      <div className={s.products}>
+        {pageState.data.map((product) => {
+          return (
+            <div>
+              <Product key={product.id} onAdd={onAdd} product={product} />
+            </div>
+          );
+        })}
+      </div>
       <Paginator
         pageSize={pageState.pageSize}
         currentPage={pageState.page}
@@ -63,13 +62,6 @@ export default function Catalog({ onAdd }) {
         onPageChanged={onPageChanged}
         totalItemsCount={pageState.total}
       />
-      {pageState.data.map((product) => {
-        return (
-          <div>
-            <Product key={product.id} onAdd={onAdd} product={product} />
-          </div>
-        );
-      })}
     </div>
   );
 }

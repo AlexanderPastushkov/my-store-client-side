@@ -30,44 +30,42 @@ const Paginator = ({
   let rightPortionPageNumber = portionNumber * portionSize;
 
   return (
-    <div>
-      <div className={s.pagination}>
-        {portionNumber > 1 && (
-          <button
-            className={s.btn}
-            onClick={() => {
-              setPortionNumber(portionNumber - 1);
+    <div className={s.pagination}>
+      {portionNumber > 1 && (
+        <button
+          className={s.btn}
+          onClick={() => {
+            setPortionNumber(portionNumber - 1);
+          }}
+        >
+          PREV
+        </button>
+      )}
+      {pages
+        .filter(
+          (p) => p >= leftPortionPageNumber && p <= rightPortionPageNumber
+        )
+        .map((p, index) => (
+          <span
+            key={index}
+            className={currentPage === p ? s.selectedPage : s.nonSelected}
+            onClick={(e) => {
+              onPageChanged(p);
             }}
           >
-            PREV
-          </button>
-        )}
-        {pages
-          .filter(
-            (p) => p >= leftPortionPageNumber && p <= rightPortionPageNumber
-          )
-          .map((p, index) => (
-            <span
-              key={index}
-              className={currentPage === p ? s.selectedPage : s.nonSelected}
-              onClick={(e) => {
-                onPageChanged(p);
-              }}
-            >
-              {p}
-            </span>
-          ))}
-        {portionCount > portionNumber && (
-          <button
-            className={s.btn}
-            onClick={() => {
-              setPortionNumber(portionNumber + 1);
-            }}
-          >
-            NEXT
-          </button>
-        )}
-      </div>
+            {p}
+          </span>
+        ))}
+      {portionCount > portionNumber && (
+        <button
+          className={s.btn}
+          onClick={() => {
+            setPortionNumber(portionNumber + 1);
+          }}
+        >
+          NEXT
+        </button>
+      )}
     </div>
   );
 };
