@@ -10,8 +10,8 @@
   position: absolute;
 
   top: 0;
-  left: 0;
-  padding: 3px;
-  border-radius: 50%;
+  left: 20px;
+  padding: 4px;
+  border-radius: 70%;
   background-color: #030d7c;
 }

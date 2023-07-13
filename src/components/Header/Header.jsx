@@ -1,8 +1,11 @@
+import { useState } from "react";
 import logo from "../../Images/HeaderImg/LogoClothing.png";
 import CartImage from "./Cart/CartImage/CartImage.jsx";
 import s from "./Header.module.css";
 import Nav from "./Nav/Nav.jsx";
 import { SearchBar } from "./SearchBar/SearchBar";
+import { SearchResultsList } from "./SearchBar/SearchResultsList";
+import { SearchContainer } from "../Common/Search/SearchContainer";
 
 const Header = ({ countCartItems }) => {
   return (
@@ -12,7 +15,7 @@ const Header = ({ countCartItems }) => {
           <img className={s.logoImg} src={logo} alt="Header Logo" />
         </div>
         <Nav />
-        <SearchBar />
+        <SearchContainer />
         <CartImage countCartItems={countCartItems} />
       </div>
     </header>

@@ -42,3 +42,10 @@
 .searchResult:hover {
   background-color: #dedcdc;
 }
+.search {
+  position: relative;
+}
+.clearBtn {
+  cursor: pointer;
+  color: #333;
+}
