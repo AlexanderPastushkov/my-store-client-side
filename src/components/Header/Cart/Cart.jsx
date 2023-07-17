@@ -5,7 +5,7 @@ import CartHeader from "./CartHeader/CartHeader";
 import CartProduct from "./CartProduct/CartProduct";
 import CartFooter from "./CartFooter/CartFooter";
 
-export default function Cart({ cartItems, setCartItems, onAdd }) {
+export default function Cart({ cartItems, setCartItems }) {
   const [total, setTotal] = useState({
     price: cartItems.reduce((prev, curr) => prev + +curr.priceTotal, 0),
     count: cartItems.reduce((prev, curr) => prev + curr.count, 0),
@@ -55,18 +55,19 @@ export default function Cart({ cartItems, setCartItems, onAdd }) {
   };
 
   const changeValue = (id, value) => {
-    setCartItems((cartItems) => {
-      return cartItems.map((product) => {
-        if (product.id === id) {
-          return {
-            ...product,
-            count: value,
-            priceTotal: (value * product.price).toFixed(2),
-          };
-        }
-        return product;
+    if (value <= 10)
+      setCartItems((cartItems) => {
+        return cartItems.map((product) => {
+          if (product.id === id) {
+            return {
+              ...product,
+              count: value,
+              priceTotal: (value * product.price).toFixed(2),
+            };
+          }
+          return product;
+        });
       });
-    });
   };
 
   const products = cartItems.map((product) => {

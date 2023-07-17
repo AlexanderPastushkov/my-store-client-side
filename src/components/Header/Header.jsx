@@ -1,11 +1,8 @@
-import { useState } from "react";
 import logo from "../../Images/HeaderImg/LogoClothing.png";
+import { SearchContainer } from "../Common/SearchBar/SearchContainer";
 import CartImage from "./Cart/CartImage/CartImage.jsx";
 import s from "./Header.module.css";
 import Nav from "./Nav/Nav.jsx";
-import { SearchBar } from "./SearchBar/SearchBar";
-import { SearchResultsList } from "./SearchBar/SearchResultsList";
-import { SearchContainer } from "../Common/Search/SearchContainer";
 
 const Header = ({ countCartItems }) => {
   return (

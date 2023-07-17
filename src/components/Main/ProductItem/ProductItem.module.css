@@ -1,0 +1,34 @@
+.product {
+  display: flex;
+
+  justify-content: space-evenly;
+}
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-right: 10px;
+}
+.image {
+  max-width: 400px;
+  max-height: 400px;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+.btn {
+  background-color: #08836d;
+  padding: 10px;
+
+  transition: all 0.3s ease 0s;
+  border-radius: 5px;
+}
+.btn:hover {
+  background-color: #03725e;
+}
+.addButton {
+  margin-right: 10px;
+}
