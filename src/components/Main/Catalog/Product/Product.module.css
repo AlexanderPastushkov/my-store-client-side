@@ -1,7 +1,6 @@
 .product {
   display: grid;
-  border: 1px solid #333;
-
+  border: 1px solid #fff;
   grid-template-columns: repeat(3, 1fr);
 }
 .image {

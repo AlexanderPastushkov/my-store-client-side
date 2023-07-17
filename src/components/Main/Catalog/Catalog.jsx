@@ -2,6 +2,7 @@ import Product from "./Product/Product";
 import React, { useEffect, useState } from "react";
 import s from "./Catalog.module.css";
 import Paginator from "../../Common/Paginator/Paginator";
+import { NavLink } from "react-router-dom";
 
 export default function Catalog({ onAdd }) {
   // const [backendData, setBackendData] = useState([]);
@@ -26,7 +27,7 @@ export default function Catalog({ onAdd }) {
         `/api/clothes?page=${pageState.page}&limit=${pageState.pageSize}`
       );
       const json = await response.json();
-      console.log(json);
+
       setPageState((old) => ({
         ...old,
         isLoading: false,
@@ -49,8 +50,8 @@ export default function Catalog({ onAdd }) {
       <div className={s.products}>
         {pageState.data.map((product) => {
           return (
-            <div>
-              <Product key={product.id} onAdd={onAdd} product={product} />
+            <div key={product.id}>
+              <Product onAdd={onAdd} product={product} />
             </div>
           );
         })}

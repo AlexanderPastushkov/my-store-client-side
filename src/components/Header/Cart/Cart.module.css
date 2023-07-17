@@ -1,6 +1,7 @@
 .cart {
   margin: 0 auto;
   text-align: center;
+  height: 100vh;
 }
 .productImg {
   max-width: 200px;
