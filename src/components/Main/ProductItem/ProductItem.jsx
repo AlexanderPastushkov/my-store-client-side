@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "../../../hoc/withRouter";
+import { withRouter } from "../../../Hoc/withRouter";
 import s from "./ProductItem.module.css";
 
 const ProductItem = (props) => {
