@@ -25,6 +25,7 @@ export default function CartProduct({
         count={count}
         id={id}
       />
+      <div className={s.productPrice}>{price} usd</div>
       <div className={s.productPrice}>{priceTotal} usd</div>
       <div className={s.productControls}>
         <button type="button" onClick={() => deleteProduct(id)}>
