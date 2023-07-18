@@ -5,7 +5,8 @@ import { requestProducts } from "../../../redux/products-reducer";
 import { connect } from "react-redux";
 
 import { NavLink } from "react-router-dom";
-import useDebounce from "../../../Hooks/useDebounce";
+import { useDebounce } from "../../../Hooks/useDebounce";
+import { getProducts } from "../../../redux/products-selectors";
 
 const Search = ({ products, requestProducts }) => {
   const [filteredData, setFilteredData] = useState([]);
@@ -62,7 +63,7 @@ const Search = ({ products, requestProducts }) => {
 
 let mapStateToProps = (state) => {
   return {
-    products: state.productsPage.products,
+    products: getProducts(state),
   };
 };
 
