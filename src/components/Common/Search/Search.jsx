@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { FaRegWindowClose, FaSearch } from "react-icons/fa";
 import s from "./SearchBar.module.css";
-import { FaSearch, FaRegWindowClose } from "react-icons/fa";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useDebounce } from "../../../Hooks/useDebounce";
+import { requestProducts } from "../../../redux/products-reducer";
 import { getProducts } from "../../../redux/products-selectors";
-import { productsAPI } from "../../../api/api";
 
-const Search = () => {
+const Search = ({ products, requestProducts }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
@@ -15,9 +15,8 @@ const Search = () => {
 
   useEffect(() => {
     if (debouncedWordEntered) {
-      productsAPI.getItems(debouncedWordEntered).then((data) => {
-        setFilteredData(data);
-      });
+      requestProducts(debouncedWordEntered);
+      setFilteredData(products);
     } else {
       setFilteredData([]);
     }
@@ -67,5 +66,7 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Search);
+export default connect(mapStateToProps, {
+  requestProducts: requestProducts,
+})(Search);
 //========================================================================================================================================================

@@ -26,7 +26,7 @@ export const setProducts = (products) => {
 //thunk-creators
 export const requestProducts = (value) => {
   return async (dispatch) => {
-    let data = await productsAPI.getProducts(value); //axios.create -> we make request from DAL
+    let data = await productsAPI.getItems(value); //axios.create -> we make request from DAL
 
     dispatch(setProducts(data));
   };
