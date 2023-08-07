@@ -1,12 +1,11 @@
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import React, { useEffect, useState } from "react";
 import "./App.css";
 import Footer from "./components/Footer/Footer.jsx";
 import Cart from "./components/Header/Cart/Cart.jsx";
 import Header from "./components/Header/Header";
-import Home from "./components/Main/Home/Home.jsx";
 import Catalog from "./components/Main/Catalog/Catalog.jsx";
-import Product from "./components/Main/Catalog/Product/Product";
+import Home from "./components/Main/Home/Home.jsx";
 import ProductItem from "./components/Main/ProductItem/ProductItem";
 
 function App() {
@@ -30,7 +29,7 @@ function App() {
         {/* <HelloFormBack /> */}
 
         <Routes>
-          {/* <Route path="/home" element={<Home />} /> */}
+          <Route path="/home" element={<Home />} />
           <Route
             path="/cart"
             element={<Cart setCartItems={setCartItems} cartItems={cartItems} />}

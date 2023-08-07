@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
 import s from "./SearchBar.module.css";
 import { FaSearch, FaRegWindowClose } from "react-icons/fa";
-import { requestProducts } from "../../../redux/products-reducer";
 import { connect } from "react-redux";
-
 import { NavLink } from "react-router-dom";
 import { useDebounce } from "../../../Hooks/useDebounce";
 import { getProducts } from "../../../redux/products-selectors";
+import { productsAPI } from "../../../api/api";
 
-const Search = ({ products, requestProducts }) => {
+const Search = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
-  const deboucedWordEntered = useDebounce(wordEntered, 500);
+  const debouncedWordEntered = useDebounce(wordEntered, 500);
 
   useEffect(() => {
-    if (deboucedWordEntered) {
-      requestProducts(deboucedWordEntered);
-      setFilteredData(products);
+    if (debouncedWordEntered) {
+      productsAPI.getItems(debouncedWordEntered).then((data) => {
+        setFilteredData(data);
+      });
     } else {
       setFilteredData([]);
     }
-  }, [deboucedWordEntered]);
+  }, [debouncedWordEntered]);
 
   const clearInput = () => {
     setFilteredData([]);
@@ -67,16 +67,5 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  requestProducts: requestProducts,
-})(Search);
+export default connect(mapStateToProps)(Search);
 //========================================================================================================================================================
-// const handleChange = (value) => {
-//   setWordEntered(value);
-//   if (value === "") {
-//     setFilteredData([]);
-//   } else {
-//     requestProducts(value);
-//     setFilteredData(products);
-//   }
-// };

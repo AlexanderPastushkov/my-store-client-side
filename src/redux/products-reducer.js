@@ -1,5 +1,4 @@
 import { productsAPI } from "../api/api";
-
 const SET_PRODUCTS = "products/SET_PRODUCTS";
 
 let initialState = {
