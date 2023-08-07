@@ -1,5 +1,6 @@
 import logo from "../../Images/HeaderImg/LogoClothing.png";
-import { SearchContainer } from "../Common/SearchBar/SearchContainer";
+import Search from "../Common/Search/Search";
+
 import CartImage from "./Cart/CartImage/CartImage.jsx";
 import s from "./Header.module.css";
 import Nav from "./Nav/Nav.jsx";
@@ -12,7 +13,7 @@ const Header = ({ countCartItems }) => {
           <img className={s.logoImg} src={logo} alt="Header Logo" />
         </div>
         <Nav />
-        <SearchContainer />
+        <Search />
         <CartImage countCartItems={countCartItems} />
       </div>
     </header>
