@@ -27,7 +27,6 @@ export const setProducts = (products) => {
 export const requestProducts = (value) => {
   return async (dispatch) => {
     let data = await productsAPI.getItems(value); //axios.create -> we make request from DAL
-
     dispatch(setProducts(data));
   };
 }; //пример замыкания

@@ -14,7 +14,6 @@ export const productsAPI = {
           return (
             value &&
             product &&
-            product &&
             product.title &&
             product.title.toLowerCase().includes(value.toLowerCase())
           );

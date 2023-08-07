@@ -8,10 +8,10 @@ import { requestProducts } from "../../../redux/products-reducer";
 import { getProducts } from "../../../redux/products-selectors";
 
 const Search = ({ products, requestProducts }) => {
-  const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
   const debouncedWordEntered = useDebounce(wordEntered, 500);
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     if (debouncedWordEntered) {
