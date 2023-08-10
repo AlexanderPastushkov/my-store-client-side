@@ -1,15 +1,25 @@
-import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
+
 import Footer from "./components/Footer/Footer.jsx";
 import Cart from "./components/Header/Cart/Cart.jsx";
 import Header from "./components/Header/Header";
 import Catalog from "./components/Main/Catalog/Catalog.jsx";
 import Home from "./components/Main/Home/Home.jsx";
-import ProductItem from "./components/Main/ProductItem/ProductItem";
+import ProductItem from "./components/Main/ProductPage/ProductPage";
+import {
+  CART_ROUTE,
+  CATALOG_ROUTE,
+  HOME_ROUTE,
+  PRODUCT_ROUTE,
+} from "./Utils/consts";
+
+const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
+  const isAuth = true;
+  const [cartItems, setCartItems] = useState(cartFromLocalStorage);
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
@@ -22,6 +32,9 @@ function App() {
       setCartItems([...cartItems, { ...product, count: 1 }]);
     }
   };
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
   return (
     <div className="wrapper">
       <Header countCartItems={cartItems.length} />
@@ -29,17 +42,23 @@ function App() {
         {/* <HelloFormBack /> */}
 
         <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route
-            path="/cart"
-            element={<Cart setCartItems={setCartItems} cartItems={cartItems} />}
-          />
+          <Route exact path="/" element={<Navigate to={HOME_ROUTE} />} />
+          <Route path={HOME_ROUTE} element={<Home />} />
+          {isAuth && (
+            <Route
+              path={CART_ROUTE}
+              element={
+                <Cart setCartItems={setCartItems} cartItems={cartItems} />
+              }
+            />
+          )}
 
-          <Route path="/catalog/" element={<Catalog onAdd={onAdd} />} />
+          <Route path={CATALOG_ROUTE} element={<Catalog onAdd={onAdd} />} />
 
-          <Route path="/product/" element={<ProductItem onAdd={onAdd} />}>
+          <Route path={PRODUCT_ROUTE} element={<ProductItem onAdd={onAdd} />}>
             <Route path=":id" element={<ProductItem onAdd={onAdd} />} />
           </Route>
+          <Route path="*" element={<div> 404 PAGE NOT FOUND</div>} />
         </Routes>
       </div>
       <Footer />

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import s from "./Carousel.module.css";
 import { slides } from "../../../../Helpers/carouselData";
-import {
-  FaAngleLeft,
-  FaAngleRight,
-  FaBullseye,
-  FaRegCircle,
-  FaCircle,
-} from "react-icons/fa";
+import { FaAngleLeft, FaAngleRight, FaCircle } from "react-icons/fa";
+import { productsAPI } from "../../../../api/api";
 
 const Carousel = () => {
+  // const [backendData, setBackendData] = useState([]);
+  // useEffect(() => {
+  //   productsAPI.getAllItems().then((data) => {
+  //     setBackendData(data);
+  //   });
+  // }, []);
   const [currImg, setCurrImg] = useState(0);
 
   const goToSlide = (currImg) => {
@@ -25,6 +26,7 @@ const Carousel = () => {
     const newIndex = isLastSlide ? 0 : currImg + 1;
     setCurrImg(newIndex);
   };
+
   return (
     <div className={s.carousel}>
       <div
