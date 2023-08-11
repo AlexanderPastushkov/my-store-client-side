@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-
 import Footer from "./components/Footer/Footer.jsx";
 import Cart from "./components/Header/Cart/Cart.jsx";
 import Header from "./components/Header/Header";
@@ -14,33 +13,39 @@ import {
   HOME_ROUTE,
   PRODUCT_ROUTE,
 } from "./Utils/consts";
+import { connect } from "react-redux";
+import { getItems } from "./redux/basket-selectors";
+import { setBasketItems } from "./redux/basket-reducer";
 
-const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
+function App({ basketItems, setBasketItems }) {
+  // let cartFromLocalStorage;
+  // try {
+  //   cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
+  // } catch (e) {
+  //   cartFromLocalStorage = {};
+  // }
 
-function App() {
   const isAuth = true;
-  const [cartItems, setCartItems] = useState(cartFromLocalStorage);
+  // const [cartItems, setCartItems] = useState([]);
   const onAdd = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
+    const exist = basketItems.find((x) => x.id === product.id);
     if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
+      setBasketItems(
+        basketItems.map((x) =>
           x.id === product.id ? { ...exist, count: exist.count + 1 } : x
         )
       );
     } else {
-      setCartItems([...cartItems, { ...product, count: 1 }]);
+      setBasketItems([...basketItems, { ...product, count: 1 }]);
     }
   };
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-  }, [cartItems]);
+  // useEffect(() => {
+  //   localStorage.setItem("cart", JSON.stringify(cartItems));
+  // }, [cartItems]);
   return (
     <div className="wrapper">
-      <Header countCartItems={cartItems.length} />
+      <Header countCartItems={basketItems.length} />
       <div className="wrapper_content">
-        {/* <HelloFormBack /> */}
-
         <Routes>
           <Route exact path="/" element={<Navigate to={HOME_ROUTE} />} />
           <Route path={HOME_ROUTE} element={<Home />} />
@@ -48,13 +53,11 @@ function App() {
             <Route
               path={CART_ROUTE}
               element={
-                <Cart setCartItems={setCartItems} cartItems={cartItems} />
+                <Cart setCartItems={setBasketItems} cartItems={basketItems} />
               }
             />
           )}
-
           <Route path={CATALOG_ROUTE} element={<Catalog onAdd={onAdd} />} />
-
           <Route path={PRODUCT_ROUTE} element={<ProductItem onAdd={onAdd} />}>
             <Route path=":id" element={<ProductItem onAdd={onAdd} />} />
           </Route>
@@ -66,4 +69,12 @@ function App() {
   );
 }
 
-export default App;
+let mapStateToProps = (state) => {
+  return {
+    basketItems: getItems(state),
+  };
+};
+
+export default connect(mapStateToProps, { setBasketItems: setBasketItems })(
+  App
+);
