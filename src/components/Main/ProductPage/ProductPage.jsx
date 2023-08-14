@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "../../../Hoc/withRouter";
-import s from "./ProductItem.module.css";
+import s from "./ProductPage.module.css";
 
 const ProductItem = (props) => {
   const [productItem, setProductItem] = useState({});
@@ -11,21 +11,22 @@ const ProductItem = (props) => {
   const refreshProduct = () => {
     let id = props.match.params.id; //wrap in withRouter
     const fetchData = async () => {
-      const response = await fetch(`/api/all/el?id=${id}`);
+      const response = await fetch(`/api/product/${id}`);
       const json = await response.json();
-      setProductItem(json.data);
+
+      setProductItem(json);
     };
     fetchData();
   };
-
-  const { category, price, title, image, description } = productItem;
+  console.log(productItem);
+  const { price, name, img } = productItem;
   return (
     <div>
       <div className={s.product}>
         <div className={s.productInfo}>
-          <div className={s.title}>category: {category}</div>
+          {/* <div className={s.title}>category: {category}</div> */}
           <div className={s.price}>price: {price}$</div>
-          <div className={s.title}>{title}</div>
+          <div className={s.title}>{name}</div>
         </div>
         <div className={s.addButton}>
           <button onClick={() => props.onAdd(productItem)} className={s.btn}>
@@ -33,10 +34,10 @@ const ProductItem = (props) => {
           </button>
         </div>
         <div className={s.image}>
-          <img className={s.img} src={image} alt={title} />
+          <img className={s.img} src={img} alt={name} />
         </div>
       </div>
-      <div>{description}</div>
+      {/* <div>{description}</div> */}
     </div>
   );
 };

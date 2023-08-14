@@ -24,10 +24,9 @@ export const setProducts = (products) => {
 
 //========================================================================================================================================================
 //thunk-creators
-export const requestProducts = (value) => {
+export const requestFilteredProducts = (value) => {
   return async (dispatch) => {
-    let data = await productsAPI.getItems(value); //axios.create -> we make request from DAL
-
+    let data = await productsAPI.getFilteredItems(value); //axios.create -> we make request from DAL
     dispatch(setProducts(data));
   };
 }; //пример замыкания

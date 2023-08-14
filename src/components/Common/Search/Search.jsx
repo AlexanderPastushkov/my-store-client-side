@@ -4,18 +4,18 @@ import s from "./SearchBar.module.css";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useDebounce } from "../../../Hooks/useDebounce";
-import { requestProducts } from "../../../redux/products-reducer";
+import { requestFilteredProducts } from "../../../redux/products-reducer";
 import { getProducts } from "../../../redux/products-selectors";
 
-const Search = ({ products, requestProducts }) => {
-  const [filteredData, setFilteredData] = useState([]);
+const Search = ({ products, requestFilteredProducts }) => {
   const [wordEntered, setWordEntered] = useState("");
 
   const debouncedWordEntered = useDebounce(wordEntered, 500);
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     if (debouncedWordEntered) {
-      requestProducts(debouncedWordEntered);
+      requestFilteredProducts(debouncedWordEntered);
       setFilteredData(products);
     } else {
       setFilteredData([]);
@@ -51,7 +51,7 @@ const Search = ({ products, requestProducts }) => {
               to={`/product/${el.id}`}
               key={el.id}
             >
-              {el.title}
+              {el.name}
             </NavLink>
           ))}
         </div>
@@ -67,6 +67,6 @@ let mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  requestProducts: requestProducts,
+  requestFilteredProducts,
 })(Search);
 //========================================================================================================================================================

@@ -10,14 +10,14 @@ export default function CartProduct({
   decrease,
   changeValue,
 }) {
-  const { image, title, priceTotal, price, id, count } = product;
+  const { img, name, priceTotal, price, id, count } = product;
   const priceFormatter = new Intl.NumberFormat();
   return (
     <section className={s.product}>
       <div className={s.productImg}>
-        <img src={image} alt="product-image" />
+        <img src={img} alt="product-image" />
       </div>
-      <div className={s.productTitle}>{title}</div>
+      <div className={s.productTitle}>{name}</div>
       <Count
         changeValue={changeValue}
         increase={increase}
