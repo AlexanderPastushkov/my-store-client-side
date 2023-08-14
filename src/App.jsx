@@ -11,11 +11,13 @@ import {
   CART_ROUTE,
   CATALOG_ROUTE,
   HOME_ROUTE,
+  LOGIN_ROUTE,
   PRODUCT_ROUTE,
 } from "./Utils/consts";
 import { connect } from "react-redux";
 import { getItems } from "./redux/basket-selectors";
 import { setBasketItems } from "./redux/basket-reducer";
+import { Auth } from "./components/Auth/Auth";
 
 function App({ basketItems, setBasketItems }) {
   // let cartFromLocalStorage;
@@ -58,6 +60,7 @@ function App({ basketItems, setBasketItems }) {
             />
           )}
           <Route path={CATALOG_ROUTE} element={<Catalog onAdd={onAdd} />} />
+          <Route path={LOGIN_ROUTE} element={<Auth />} />
           <Route path={PRODUCT_ROUTE} element={<ProductItem onAdd={onAdd} />}>
             <Route path=":id" element={<ProductItem onAdd={onAdd} />} />
           </Route>

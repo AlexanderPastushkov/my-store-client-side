@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import s from "./Nav.module.css";
-import { CATALOG_ROUTE, HOME_ROUTE } from "../../../Utils/consts";
+import { CATALOG_ROUTE, HOME_ROUTE, LOGIN_ROUTE } from "../../../Utils/consts";
 
 const activeLink = ({ isActive }) => (isActive ? s.active : s.item); //isActive - atribute of Navlink
 const Nav = () => {
@@ -29,8 +29,8 @@ const Nav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/account" className={activeLink}>
-            Account
+          <NavLink to={LOGIN_ROUTE} className={activeLink}>
+            Login
           </NavLink>
         </li>
       </ul>
