@@ -11,7 +11,11 @@ export default function Product({ product, onAdd }) {
           {name}
         </NavLink>
         <div className={s.image}>
-          <img className={s.img} src={img} alt={name} />
+          <img
+            className={s.img}
+            src={`http://localhost:3000/${img}`}
+            alt={name}
+          />
         </div>
 
         <div className={s.price}>$ {price}</div>
