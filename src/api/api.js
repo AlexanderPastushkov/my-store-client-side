@@ -16,20 +16,20 @@ $authHost.interceptors.request.use(authInterceptor);
 
 export const productsAPI = {
   getFilteredItems(value) {
-    return $host
-      .get("/api/product")
-      .then((response) => response.data)
-      .then((data) => {
-        console.log(data);
-        return data.rows.filter((product) => {
-          return (
-            value &&
-            product &&
-            product.name &&
-            product.name.toLowerCase().includes(value.toLowerCase())
-          );
+    if (value)
+      return $host
+        .get("/api/product")
+        .then((response) => response.data)
+        .then((data) => {
+          console.log(data);
+          return data.rows.filter((product) => {
+            return (
+              product &&
+              product.name &&
+              product.name.toLowerCase().includes(value.toLowerCase())
+            );
+          });
         });
-      });
   },
   getAllItems() {
     return $host.get("/api/product").then((response) => response.data);

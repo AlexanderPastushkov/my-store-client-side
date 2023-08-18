@@ -1,34 +1,28 @@
-// import { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Footer from "./components/Footer/Footer.jsx";
-import Cart from "./components/Header/Cart/Cart.jsx";
-import Header from "./components/Header/Header";
-import Catalog from "./components/Main/Catalog/Catalog.jsx";
-import Home from "./components/Main/Home/Home.jsx";
-import ProductItem from "./components/Main/ProductPage/ProductPage";
+import { MyContext } from "./Context/Context.js";
 import {
   CART_ROUTE,
   CATALOG_ROUTE,
   HOME_ROUTE,
   LOGIN_ROUTE,
   PRODUCT_ROUTE,
+  REGISTRATION_ROUTE,
 } from "./Utils/consts";
-import { connect } from "react-redux";
-import { getItems } from "./redux/basket-selectors";
+import AuthContainer from "./components/Auth/AuthContainer";
+import Footer from "./components/Footer/Footer.jsx";
+import Cart from "./components/Header/Cart/Cart.jsx";
+import Header from "./components/Header/Header";
+import Catalog from "./components/Main/Catalog/Catalog.jsx";
+import Home from "./components/Main/Home/Home.jsx";
+import ProductItem from "./components/Main/ProductPage/ProductPage";
+import { setUserData } from "./redux/auth-reducer";
+import { getIsLoginBollean } from "./redux/auth-selectors";
 import { setBasketItems } from "./redux/basket-reducer";
-import { Auth } from "./components/Auth/Auth";
+import { getItems } from "./redux/basket-selectors";
 
 function App({ basketItems, setBasketItems }) {
-  // let cartFromLocalStorage;
-  // try {
-  //   cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
-  // } catch (e) {
-  //   cartFromLocalStorage = {};
-  // }
-
-  const isAuth = true;
-  // const [cartItems, setCartItems] = useState([]);
   const onAdd = (product) => {
     const exist = basketItems.find((x) => x.id === product.id);
     if (exist) {
@@ -41,43 +35,47 @@ function App({ basketItems, setBasketItems }) {
       setBasketItems([...basketItems, { ...product, count: 1 }]);
     }
   };
-  // useEffect(() => {
-  //   localStorage.setItem("cart", JSON.stringify(cartItems));
-  // }, [cartItems]);
+  const value = {
+    onAdd,
+  };
+
   return (
-    <div className="wrapper">
-      <Header countCartItems={basketItems.length} />
-      <div className="wrapper_content">
-        <Routes>
-          <Route exact path="/" element={<Navigate to={HOME_ROUTE} />} />
-          <Route path={HOME_ROUTE} element={<Home />} />
-          {isAuth && (
+    <MyContext.Provider value={value}>
+      <div className="wrapper">
+        <Header countCartItems={basketItems.length} />
+        <div className="wrapper_content">
+          <Routes>
+            <Route exact path="/" element={<Navigate to={HOME_ROUTE} />} />
+            <Route path={HOME_ROUTE} element={<Home />} />
             <Route
               path={CART_ROUTE}
               element={
                 <Cart setCartItems={setBasketItems} cartItems={basketItems} />
               }
             />
-          )}
-          <Route path={CATALOG_ROUTE} element={<Catalog onAdd={onAdd} />} />
-          <Route path={LOGIN_ROUTE} element={<Auth />} />
-          <Route path={PRODUCT_ROUTE} element={<ProductItem onAdd={onAdd} />}>
-            <Route path=":id" element={<ProductItem onAdd={onAdd} />} />
-          </Route>
-          <Route path="*" element={<div> 404 PAGE NOT FOUND</div>} />
-        </Routes>
+            <Route path={CATALOG_ROUTE} element={<Catalog />} />
+            <Route path={LOGIN_ROUTE} element={<AuthContainer />} />
+            <Route path={REGISTRATION_ROUTE} element={<AuthContainer />} />
+            <Route path={PRODUCT_ROUTE} element={<ProductItem />}>
+              <Route path=":id" element={<ProductItem />} />
+            </Route>
+            <Route path="*" element={<div> 404 PAGE NOT FOUND</div>} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </MyContext.Provider>
   );
 }
 
 let mapStateToProps = (state) => {
   return {
     basketItems: getItems(state),
+    isLogin: getIsLoginBollean(state),
   };
 };
 
-export default connect(mapStateToProps, { setBasketItems: setBasketItems })(
-  App
-);
+export default connect(mapStateToProps, {
+  setBasketItems: setBasketItems,
+  setUserData: setUserData,
+})(App);

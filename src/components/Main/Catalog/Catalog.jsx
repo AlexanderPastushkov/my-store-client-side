@@ -3,7 +3,14 @@ import React, { useEffect, useState } from "react";
 import s from "./Catalog.module.css";
 import Paginator from "../../Common/Paginator/Paginator";
 
-export default function Catalog({ onAdd }) {
+export default function Catalog() {
+  // const [backendData, setBackendData] = useState([]);
+  // useEffect(() => {
+  //   fetch("/api/all")
+  //     .then((response) => response.json())
+  //     .then((data) => setBackendData(data));
+  // }, []);
+
   const [pageState, setPageState] = useState({
     isLoading: false,
     data: [],
@@ -43,7 +50,7 @@ export default function Catalog({ onAdd }) {
         {pageState.data.map((product) => {
           return (
             <div key={product.id}>
-              <Product onAdd={onAdd} product={product} />
+              <Product product={product} />
             </div>
           );
         })}

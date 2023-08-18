@@ -2,6 +2,7 @@ import React from "react";
 import s from "../Cart.module.css";
 import Count from "../Count/Count";
 import deleteBtn from "../../../../Images/Cart/cross.svg";
+import { Image } from "../../../Common/Image/Image";
 
 export default function CartProduct({
   product,
@@ -15,7 +16,7 @@ export default function CartProduct({
   return (
     <section className={s.product}>
       <div className={s.productImg}>
-        <img src={img} alt="product-image" />
+        <Image img={img} name={name} />
       </div>
       <div className={s.productTitle}>{name}</div>
       <Count

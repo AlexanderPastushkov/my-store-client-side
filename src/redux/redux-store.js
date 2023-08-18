@@ -9,10 +9,12 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import thunkMiddleware from "redux-thunk";
 import basketReducer from "./basket-reducer";
+import { authReducer } from "./auth-reducer";
 
 let reducers = combineReducers({
   productsPage: productsReducer,
   basketPage: basketReducer,
+  authPage: authReducer,
 });
 
 const persistConfig = {

@@ -7,13 +7,13 @@ import CartFooter from "./CartFooter/CartFooter";
 
 export default function Cart({ cartItems, setCartItems }) {
   const [total, setTotal] = useState({
-    price: cartItems.reduce((prev, curr) => prev + +curr.priceTotal, 0),
+    price: +cartItems.reduce((prev, curr) => prev + +curr.priceTotal, 0),
     count: cartItems.reduce((prev, curr) => prev + curr.count, 0),
   });
 
   useEffect(() => {
     setTotal({
-      price: cartItems
+      price: +cartItems
         .reduce((prev, curr) => prev + +curr.priceTotal, 0)
         .toFixed(2),
       count: cartItems.reduce((prev, curr) => prev + curr.count, 0),
