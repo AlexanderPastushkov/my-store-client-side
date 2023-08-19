@@ -16,6 +16,6 @@ const AuthContainer = ({ setUserData }) => {
   return <Registration setUserData={setUserData} />;
 };
 
-export default connect({
+export default connect(null, {
   setUserData,
 })(AuthContainer);
