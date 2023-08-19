@@ -49,3 +49,11 @@
   cursor: pointer;
   font-size: 16px;
 }
+.nameLink {
+  color: black;
+  transition: all 0.3s ease 0s;
+}
+.nameLink:hover {
+  color: rgb(71, 71, 71);
+  font-size: 18px;
+}

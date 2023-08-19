@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageSlider } from "./Slider/ImageSlider";
+
 import Carousel from "./Carousel/Carousel";
 import s from "./Home.module.css";
 import BigSales from "./BigSales/BigSales";
