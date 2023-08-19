@@ -5,29 +5,29 @@ import CartHeader from "./CartHeader/CartHeader";
 import CartProduct from "./CartProduct/CartProduct";
 import CartFooter from "./CartFooter/CartFooter";
 
-export default function Cart({ cartItems, setCartItems }) {
+export default function Cart({ basketItems, setCartItems }) {
   const [total, setTotal] = useState({
-    price: +cartItems.reduce((prev, curr) => prev + +curr.priceTotal, 0),
-    count: cartItems.reduce((prev, curr) => prev + curr.count, 0),
+    price: +basketItems.reduce((prev, curr) => prev + +curr.priceTotal, 0),
+    count: basketItems.reduce((prev, curr) => prev + curr.count, 0),
   });
 
   useEffect(() => {
     setTotal({
-      price: +cartItems
+      price: +basketItems
         .reduce((prev, curr) => prev + +curr.priceTotal, 0)
         .toFixed(2),
-      count: cartItems.reduce((prev, curr) => prev + curr.count, 0),
+      count: basketItems.reduce((prev, curr) => prev + curr.count, 0),
     });
-  }, [cartItems]);
+  }, [basketItems]);
 
   const deleteProduct = (id) => {
-    setCartItems((cartItems) => {
-      return cartItems.filter((product) => id !== product.id);
+    setCartItems((basketItems) => {
+      return basketItems.filter((product) => id !== product.id);
     });
   };
   const increase = (id) => {
-    setCartItems((cartItems) => {
-      return cartItems.map((product) => {
+    setCartItems((basketItems) => {
+      return basketItems.map((product) => {
         if (product.id === id && product.count < 10) {
           return {
             ...product,
@@ -40,8 +40,8 @@ export default function Cart({ cartItems, setCartItems }) {
     });
   };
   const decrease = (id) => {
-    setCartItems((cartItems) => {
-      return cartItems.map((product) => {
+    setCartItems((basketItems) => {
+      return basketItems.map((product) => {
         if (product.id === id && product.count > 1) {
           return {
             ...product,
@@ -57,7 +57,7 @@ export default function Cart({ cartItems, setCartItems }) {
   const changeValue = (id, value) => {
     if (value <= 10)
       setCartItems((cartItems) => {
-        return cartItems.map((product) => {
+        return basketItems.map((product) => {
           if (product.id === id) {
             return {
               ...product,
@@ -70,7 +70,7 @@ export default function Cart({ cartItems, setCartItems }) {
       });
   };
 
-  const products = cartItems.map((product) => {
+  const products = basketItems.map((product) => {
     return (
       <CartProduct
         deleteProduct={deleteProduct}
@@ -87,7 +87,7 @@ export default function Cart({ cartItems, setCartItems }) {
     <div className={s.cart}>
       <Title />
       {/* <CartHeader /> */}
-      {cartItems.length === 0 && <div>Cart is empty</div>}
+      {basketItems.length === 0 && <div>Cart is empty</div>}
       <div className={s.products}>{products}</div>
       <CartFooter total={total} />
     </div>

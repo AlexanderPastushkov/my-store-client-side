@@ -1,9 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { LOGIN_ROUTE } from "../../../Utils/consts";
+import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../../../Utils/consts";
 import s from "./Login.module.css";
 
-export const Login = ({ isLogin, email, logout }) => {
-  console.log(isLogin, email);
+export const LoginBtn = ({ isLogin, email, logout }) => {
   return (
     <div>
       {!isLogin ? (

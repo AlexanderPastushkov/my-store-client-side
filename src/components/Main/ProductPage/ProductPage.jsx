@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { withRouter } from "../../../Hoc/withRouter";
-import s from "./ProductPage.module.css";
 import { Image } from "../../Common/Image/Image";
-import { MyContext } from "../../../Context/Context";
+import s from "./ProductPage.module.css";
 
 const ProductItem = (props) => {
   const [productItem, setProductItem] = useState({});
@@ -22,8 +21,7 @@ const ProductItem = (props) => {
   };
   console.log(productItem);
   const { price, name, img } = productItem;
-  const value = useContext(MyContext);
-  const { onAdd } = value;
+
   return (
     <div>
       <div className={s.product}>
@@ -33,7 +31,7 @@ const ProductItem = (props) => {
           <div className={s.title}>{name}</div>
         </div>
         <div className={s.addButton}>
-          <button onClick={() => onAdd(productItem)} className={s.btn}>
+          <button onClick={() => props.onAdd(productItem)} className={s.btn}>
             add to cart
           </button>
         </div>

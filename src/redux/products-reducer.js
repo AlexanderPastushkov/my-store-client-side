@@ -31,4 +31,11 @@ export const requestFilteredProducts = (value) => {
   };
 }; //пример замыкания
 
+export const requestAllProducts = () => {
+  return async (dispatch) => {
+    let data = await productsAPI.getAllItems(); //axios.create -> we make request from DAL
+    dispatch(setProducts(data));
+  };
+};
+
 export default productsReducer;

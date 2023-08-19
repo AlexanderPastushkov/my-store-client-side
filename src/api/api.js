@@ -30,7 +30,7 @@ export const productsAPI = {
             );
           });
         });
-  },
+  }, //will try to fix soon
   getAllItems() {
     return $host.get("/api/product").then((response) => response.data);
   },

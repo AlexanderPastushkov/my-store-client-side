@@ -3,8 +3,7 @@ import Search from "../Common/Search/Search";
 
 import CartImage from "./Cart/CartImage/CartImage.jsx";
 import s from "./Header.module.css";
-import { Login } from "./Login/Login";
-import LoginContainer from "./Login/LoginContainer";
+import LoginBtnContainer from "./Login/LoginBtnContainer";
 import { Nav } from "./Nav/Nav.jsx";
 
 const Header = ({ countCartItems }) => {
@@ -16,7 +15,7 @@ const Header = ({ countCartItems }) => {
         </div>
         <Nav />
         <Search />
-        <LoginContainer />
+        <LoginBtnContainer />
         <CartImage countCartItems={countCartItems} />
       </div>
     </header>

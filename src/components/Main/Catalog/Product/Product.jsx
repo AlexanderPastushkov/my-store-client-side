@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
-import s from "./Product.module.css";
 import { NavLink } from "react-router-dom";
 import { Image } from "../../../Common/Image/Image";
-import { MyContext } from "../../../../Context/Context";
+import s from "./Product.module.css";
 
-export default function Product({ product }) {
+export default function Product({ product, onAdd }) {
   const { img, name, priceTotal, price, id, count } = product;
-  const value = useContext(MyContext);
-  const { onAdd } = value;
+
   return (
     <section>
       <div className={s.product}>

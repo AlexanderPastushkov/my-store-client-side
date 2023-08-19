@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { MyContext } from "./Context/Context.js";
+
 import {
   CART_ROUTE,
   CATALOG_ROUTE,
@@ -19,52 +19,47 @@ import Home from "./components/Main/Home/Home.jsx";
 import ProductItem from "./components/Main/ProductPage/ProductPage";
 import { setUserData } from "./redux/auth-reducer";
 import { getIsLoginBollean } from "./redux/auth-selectors";
-import { setBasketItems } from "./redux/basket-reducer";
+import { setBasketItem } from "./redux/basket-reducer";
 import { getItems } from "./redux/basket-selectors";
 
-function App({ basketItems, setBasketItems }) {
+function App({ basketItems, setBasketItem }) {
   const onAdd = (product) => {
     const exist = basketItems.find((x) => x.id === product.id);
     if (exist) {
-      setBasketItems(
+      setBasketItem(
         basketItems.map((x) =>
           x.id === product.id ? { ...exist, count: exist.count + 1 } : x
         )
       );
     } else {
-      setBasketItems([...basketItems, { ...product, count: 1 }]);
+      setBasketItem([...basketItems, { ...product, count: 1 }]);
     }
-  };
-  const value = {
-    onAdd,
   };
 
   return (
-    <MyContext.Provider value={value}>
-      <div className="wrapper">
-        <Header countCartItems={basketItems.length} />
-        <div className="wrapper_content">
-          <Routes>
-            <Route exact path="/" element={<Navigate to={HOME_ROUTE} />} />
-            <Route path={HOME_ROUTE} element={<Home />} />
-            <Route
-              path={CART_ROUTE}
-              element={
-                <Cart setCartItems={setBasketItems} cartItems={basketItems} />
-              }
-            />
-            <Route path={CATALOG_ROUTE} element={<Catalog />} />
-            <Route path={LOGIN_ROUTE} element={<AuthContainer />} />
-            <Route path={REGISTRATION_ROUTE} element={<AuthContainer />} />
-            <Route path={PRODUCT_ROUTE} element={<ProductItem />}>
-              <Route path=":id" element={<ProductItem />} />
-            </Route>
-            <Route path="*" element={<div> 404 PAGE NOT FOUND</div>} />
-          </Routes>
-        </div>
-        <Footer />
+    <div className="wrapper">
+      <Header countCartItems={basketItems.length} />
+      <div className="wrapper_content">
+        <Routes>
+          <Route exact path="/" element={<Navigate to={HOME_ROUTE} />} />
+          <Route path={HOME_ROUTE} element={<Home />} />
+          <Route
+            path={CART_ROUTE}
+            element={
+              <Cart setCartItems={setBasketItem} basketItems={basketItems} />
+            }
+          />
+          <Route path={CATALOG_ROUTE} element={<Catalog onAdd={onAdd} />} />
+          <Route path={LOGIN_ROUTE} element={<AuthContainer />} />
+          <Route path={REGISTRATION_ROUTE} element={<AuthContainer />} />
+          <Route path={PRODUCT_ROUTE} element={<ProductItem onAdd={onAdd} />}>
+            <Route path=":id" element={<ProductItem onAdd={onAdd} />} />
+          </Route>
+          <Route path="*" element={<div> 404 PAGE NOT FOUND</div>} />
+        </Routes>
       </div>
-    </MyContext.Provider>
+      <Footer />
+    </div>
   );
 }
 
@@ -76,6 +71,7 @@ let mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  setBasketItems: setBasketItems,
+  setBasketItem: setBasketItem,
   setUserData: setUserData,
+  // onAdd: onAdd,
 })(App);
