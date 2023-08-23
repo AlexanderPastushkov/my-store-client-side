@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -17,22 +17,32 @@ import Header from "./components/Header/Header";
 import Catalog from "./components/Main/Catalog/Catalog.jsx";
 import Home from "./components/Main/Home/Home.jsx";
 import ProductItem from "./components/Main/ProductPage/ProductPage";
-import { setUserData } from "./redux/auth-reducer";
-import { getIsLoginBollean } from "./redux/auth-selectors";
 import { setBasketItem } from "./redux/basket-reducer";
 import { getItems } from "./redux/basket-selectors";
 
-function App({ basketItems, setBasketItem }) {
+export function App() {
+  const dispatch = useDispatch();
+  const basketItems = useSelector((state) => getItems(state));
+
   const onAdd = (product) => {
     const exist = basketItems.find((x) => x.id === product.id);
+
     if (exist) {
-      setBasketItem(
-        basketItems.map((x) =>
-          x.id === product.id ? { ...exist, count: exist.count + 1 } : x
+      dispatch(
+        setBasketItem(
+          basketItems.map((x) =>
+            x.id === product.id
+              ? {
+                  ...exist,
+                  count: ++exist.count,
+                  priceTotal: exist.priceTotal + exist.price,
+                }
+              : x
+          )
         )
       );
     } else {
-      setBasketItem([...basketItems, { ...product, count: 1 }]);
+      dispatch(setBasketItem([...basketItems, { ...product, count: 1 }]));
     }
   };
 
@@ -45,9 +55,7 @@ function App({ basketItems, setBasketItem }) {
           <Route path={HOME_ROUTE} element={<Home />} />
           <Route
             path={CART_ROUTE}
-            element={
-              <Cart setCartItems={setBasketItem} basketItems={basketItems} />
-            }
+            element={<Cart basketItems={basketItems} />}
           />
           <Route path={CATALOG_ROUTE} element={<Catalog onAdd={onAdd} />} />
           <Route path={LOGIN_ROUTE} element={<AuthContainer />} />
@@ -62,16 +70,3 @@ function App({ basketItems, setBasketItem }) {
     </div>
   );
 }
-
-let mapStateToProps = (state) => {
-  return {
-    basketItems: getItems(state),
-    isLogin: getIsLoginBollean(state),
-  };
-};
-
-export default connect(mapStateToProps, {
-  setBasketItem: setBasketItem,
-  setUserData: setUserData,
-  // onAdd: onAdd,
-})(App);

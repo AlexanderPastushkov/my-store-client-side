@@ -3,7 +3,7 @@ import Search from "../Common/Search/Search";
 
 import CartImage from "./Cart/CartImage/CartImage.jsx";
 import s from "./Header.module.css";
-import LoginBtnContainer from "./Login/LoginBtnContainer";
+import { LoginBtnContainer } from "./Login/LoginBtnContainer";
 import { Nav } from "./Nav/Nav.jsx";
 
 const Header = ({ countCartItems }) => {

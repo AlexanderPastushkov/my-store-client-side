@@ -1,19 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaAngleLeft, FaAngleRight, FaCircle } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import { productsAPI } from "../../../../api/api";
+
 import s from "./Carousel.module.css";
 
-const Carousel = () => {
-  const [backendData, setBackendData] = useState([]);
-  useEffect(() => {
-    productsAPI.getAllItems().then((data) => {
-      console.log(data);
-      setBackendData(data);
-    });
-  }, []);
-
-  const arrayOfSlides = backendData.rows;
+const Carousel = ({ products }) => {
+  console.log(products);
+  const arrayOfSlides = products.rows;
 
   const [currImg, setCurrImg] = useState(0);
 

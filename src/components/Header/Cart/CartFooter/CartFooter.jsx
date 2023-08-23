@@ -7,7 +7,7 @@ export default function CartFooter({ total }) {
   return (
     <div className={s.cartFooter}>
       <div className={s.cartFooter__count}>total count: {count}</div>
-      <div className={s.cartFooter__price}>total price: {+price}</div>
+      <div className={s.cartFooter__price}>total price: {price}</div>
     </div>
   );
 }

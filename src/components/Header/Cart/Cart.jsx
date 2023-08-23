@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Title from "./Title/Title";
 import s from "./Cart.module.css";
-import CartHeader from "./CartHeader/CartHeader";
 import CartProduct from "./CartProduct/CartProduct";
 import CartFooter from "./CartFooter/CartFooter";
+import { setBasketItem } from "../../../redux/basket-reducer.js";
+import { useDispatch } from "react-redux";
 
-export default function Cart({ basketItems, setCartItems }) {
+export default function Cart({ basketItems }) {
   const [total, setTotal] = useState({
-    price: +basketItems.reduce((prev, curr) => prev + +curr.priceTotal, 0),
+    price: basketItems.reduce((prev, curr) => prev + +curr.priceTotal, 0),
     count: basketItems.reduce((prev, curr) => prev + curr.count, 0),
   });
-
+  console.log(total);
   useEffect(() => {
     setTotal({
       price: +basketItems
@@ -19,55 +20,65 @@ export default function Cart({ basketItems, setCartItems }) {
       count: basketItems.reduce((prev, curr) => prev + curr.count, 0),
     });
   }, [basketItems]);
-
+  const dispatch = useDispatch();
   const deleteProduct = (id) => {
-    setCartItems((basketItems) => {
-      return basketItems.filter((product) => id !== product.id);
-    });
+    dispatch(
+      setBasketItem((basketItems) => {
+        return basketItems.filter((product) => id !== product.id);
+      })
+    );
   };
   const increase = (id) => {
-    setCartItems((basketItems) => {
-      return basketItems.map((product) => {
-        if (product.id === id && product.count < 10) {
-          return {
-            ...product,
-            count: product.count + 1,
-            priceTotal: ((product.count + 1) * product.price).toFixed(2),
-          };
-        }
-        return product;
-      });
-    });
-  };
-  const decrease = (id) => {
-    setCartItems((basketItems) => {
-      return basketItems.map((product) => {
-        if (product.id === id && product.count > 1) {
-          return {
-            ...product,
-            count: product.count - 1,
-            priceTotal: ((product.count - 1) * product.price).toFixed(2),
-          };
-        }
-        return product;
-      });
-    });
-  };
-
-  const changeValue = (id, value) => {
-    if (value <= 10)
-      setCartItems((cartItems) => {
-        return basketItems.map((product) => {
-          if (product.id === id) {
+    debugger;
+    dispatch(
+      setBasketItem((basketItems) => {
+        basketItems.map((product) => {
+          if (product.id === id && product.count < 10) {
             return {
               ...product,
-              count: value,
-              priceTotal: (value * product.price).toFixed(2),
+              count: product.count + 1,
+              priceTotal: ((product.count + 1) * product.price).toFixed(2),
             };
           }
           return product;
         });
-      });
+      })
+    );
+  };
+
+  const decrease = (id) => {
+    dispatch(
+      setBasketItem((basketItems) => {
+        return basketItems.map((product) => {
+          if (product.id === id && product.count > 1) {
+            return {
+              ...product,
+              count: product.count - 1,
+              priceTotal: ((product.count - 1) * product.price).toFixed(2),
+            };
+          }
+          return product;
+        });
+      })
+    );
+  };
+
+  const changeValue = (id, value) => {
+    if (value <= 10)
+      dispatch(
+        setBasketItem((basketItems) => {
+          return basketItems.map((product) => {
+            if (product.id === id) {
+              return {
+                ...product,
+                count: value,
+                priceTotal: (value * product.price).toFixed(2),
+              };
+            }
+            return product;
+          });
+        })
+      );
   };
 
   const products = basketItems.map((product) => {
@@ -86,7 +97,7 @@ export default function Cart({ basketItems, setCartItems }) {
   return (
     <div className={s.cart}>
       <Title />
-      {/* <CartHeader /> */}
+
       {basketItems.length === 0 && <div>Cart is empty</div>}
       <div className={s.products}>{products}</div>
       <CartFooter total={total} />

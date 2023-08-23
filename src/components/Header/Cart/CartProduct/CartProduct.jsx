@@ -12,7 +12,6 @@ export default function CartProduct({
   changeValue,
 }) {
   const { img, name, priceTotal, price, id, count } = product;
-  const priceFormatter = new Intl.NumberFormat();
   return (
     <section className={s.product}>
       <div className={s.productImg}>

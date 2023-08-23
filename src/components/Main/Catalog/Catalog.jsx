@@ -4,13 +4,6 @@ import s from "./Catalog.module.css";
 import Paginator from "../../Common/Paginator/Paginator";
 
 export default function Catalog({ onAdd }) {
-  // const [backendData, setBackendData] = useState([]);
-  // useEffect(() => {
-  //   fetch("/api/all")
-  //     .then((response) => response.json())
-  //     .then((data) => setBackendData(data));
-  // }, []);
-
   const [pageState, setPageState] = useState({
     isLoading: false,
     data: [],

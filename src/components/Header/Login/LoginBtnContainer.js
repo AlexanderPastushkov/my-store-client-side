@@ -1,15 +1,11 @@
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { logout } from "../../../redux/auth-reducer";
 import { getIsLoginBollean, getUserEmail } from "../../../redux/auth-selectors";
 import { LoginBtn } from "./LoginBtn";
 
-const LoginBtnContainer = ({ isLogin, email, logout }) => {
+export const LoginBtnContainer = () => {
+  const email = useSelector((state) => getUserEmail(state));
+  const isLogin = useSelector((state) => getIsLoginBollean(state));
+
   return <LoginBtn isLogin={isLogin} email={email} logout={logout} />;
 };
-const mapStateToProps = (state) => {
-  return {
-    email: getUserEmail(state),
-    isLogin: getIsLoginBollean(state),
-  };
-};
-export default connect(mapStateToProps, { logout: logout })(LoginBtnContainer);
