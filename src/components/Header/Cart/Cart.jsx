@@ -4,8 +4,9 @@ import s from "./Cart.module.css";
 import CartProduct from "./CartProduct/CartProduct";
 import CartFooter from "./CartFooter/CartFooter";
 import { useDispatch } from "react-redux";
+import { setBasketItems } from "../../../redux/basket-reducer";
 
-export function Cart({ basketItems, setBasketItems }) {
+export function Cart({ basketItems }) {
   const [total, setTotal] = useState({
     price: basketItems.reduce((prev, curr) => prev + +curr.priceTotal, 0),
     count: basketItems.reduce((prev, curr) => prev + curr.count, 0),

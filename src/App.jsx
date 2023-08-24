@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-
 import {
   CART_ROUTE,
   CATALOG_ROUTE,
@@ -54,9 +53,7 @@ export function App() {
           <Route path={HOME_ROUTE} element={<Home />} />
           <Route
             path={CART_ROUTE}
-            element={
-              <Cart setBasketItem={setBasketItems} basketItems={basketItems} />
-            }
+            element={<Cart basketItems={basketItems} />}
           />
           <Route path={CATALOG_ROUTE} element={<Catalog onAdd={onAdd} />} />
           <Route path={LOGIN_ROUTE} element={<AuthContainer />} />
