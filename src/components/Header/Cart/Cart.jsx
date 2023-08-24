@@ -3,15 +3,14 @@ import Title from "./Title/Title";
 import s from "./Cart.module.css";
 import CartProduct from "./CartProduct/CartProduct";
 import CartFooter from "./CartFooter/CartFooter";
-import { setBasketItem } from "../../../redux/basket-reducer.js";
 import { useDispatch } from "react-redux";
 
-export default function Cart({ basketItems }) {
+export function Cart({ basketItems, setBasketItems }) {
   const [total, setTotal] = useState({
     price: basketItems.reduce((prev, curr) => prev + +curr.priceTotal, 0),
     count: basketItems.reduce((prev, curr) => prev + curr.count, 0),
   });
-  console.log(total);
+  const dispatch = useDispatch();
   useEffect(() => {
     setTotal({
       price: +basketItems
@@ -20,18 +19,17 @@ export default function Cart({ basketItems }) {
       count: basketItems.reduce((prev, curr) => prev + curr.count, 0),
     });
   }, [basketItems]);
-  const dispatch = useDispatch();
+
   const deleteProduct = (id) => {
     dispatch(
-      setBasketItem((basketItems) => {
+      setBasketItems((basketItems) => {
         return basketItems.filter((product) => id !== product.id);
       })
     );
   };
   const increase = (id) => {
-    debugger;
     dispatch(
-      setBasketItem((basketItems) => {
+      setBasketItems((basketItems) => {
         basketItems.map((product) => {
           if (product.id === id && product.count < 10) {
             return {
@@ -48,7 +46,7 @@ export default function Cart({ basketItems }) {
 
   const decrease = (id) => {
     dispatch(
-      setBasketItem((basketItems) => {
+      setBasketItems((basketItems) => {
         return basketItems.map((product) => {
           if (product.id === id && product.count > 1) {
             return {
@@ -66,7 +64,7 @@ export default function Cart({ basketItems }) {
   const changeValue = (id, value) => {
     if (value <= 10)
       dispatch(
-        setBasketItem((basketItems) => {
+        setBasketItems((basketItems) => {
           return basketItems.map((product) => {
             if (product.id === id) {
               return {
@@ -97,7 +95,6 @@ export default function Cart({ basketItems }) {
   return (
     <div className={s.cart}>
       <Title />
-
       {basketItems.length === 0 && <div>Cart is empty</div>}
       <div className={s.products}>{products}</div>
       <CartFooter total={total} />

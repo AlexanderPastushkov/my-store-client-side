@@ -9,7 +9,7 @@ const basketReducer = (state = initialState, action) => {
     case ADD_PRODUCT: {
       return {
         ...state,
-        basketItems: action.item,
+        basketItems: action.product,
       };
     }
     default:
@@ -17,10 +17,10 @@ const basketReducer = (state = initialState, action) => {
   }
 };
 
-export const setBasketItem = (item) => {
+export const setBasketItems = (product) => {
   return {
     type: ADD_PRODUCT,
-    item,
+    product,
   };
 };
 

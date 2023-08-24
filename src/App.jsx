@@ -12,24 +12,23 @@ import {
 } from "./Utils/consts";
 import AuthContainer from "./components/Auth/AuthContainer";
 import Footer from "./components/Footer/Footer.jsx";
-import Cart from "./components/Header/Cart/Cart.jsx";
+import { Cart } from "./components/Header/Cart/Cart.jsx";
 import Header from "./components/Header/Header";
 import Catalog from "./components/Main/Catalog/Catalog.jsx";
 import Home from "./components/Main/Home/Home.jsx";
 import ProductItem from "./components/Main/ProductPage/ProductPage";
-import { setBasketItem } from "./redux/basket-reducer";
+import { setBasketItems } from "./redux/basket-reducer";
 import { getItems } from "./redux/basket-selectors";
 
 export function App() {
   const dispatch = useDispatch();
-  const basketItems = useSelector((state) => getItems(state));
-
+  const basketItems = useSelector(getItems);
   const onAdd = (product) => {
     const exist = basketItems.find((x) => x.id === product.id);
 
     if (exist) {
       dispatch(
-        setBasketItem(
+        setBasketItems(
           basketItems.map((x) =>
             x.id === product.id
               ? {
@@ -42,7 +41,7 @@ export function App() {
         )
       );
     } else {
-      dispatch(setBasketItem([...basketItems, { ...product, count: 1 }]));
+      dispatch(setBasketItems([...basketItems, { ...product, count: 1 }]));
     }
   };
 
@@ -55,7 +54,9 @@ export function App() {
           <Route path={HOME_ROUTE} element={<Home />} />
           <Route
             path={CART_ROUTE}
-            element={<Cart basketItems={basketItems} />}
+            element={
+              <Cart setBasketItem={setBasketItems} basketItems={basketItems} />
+            }
           />
           <Route path={CATALOG_ROUTE} element={<Catalog onAdd={onAdd} />} />
           <Route path={LOGIN_ROUTE} element={<AuthContainer />} />

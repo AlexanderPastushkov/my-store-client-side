@@ -3,6 +3,10 @@ import { Field, Form, Formik } from "formik";
 import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../../api/userAPI";
 import s from "./Auth.module.css";
+import {
+  loginFormValidateEmail,
+  loginFormValidatePassword,
+} from "../../Utils/commonFunctions";
 
 export const Login = ({ setUserData }) => {
   const navigateToRoute = useNavigate();
@@ -16,18 +20,6 @@ export const Login = ({ setUserData }) => {
     } catch (e) {
       alert(e.response.data.message);
     }
-  };
-  const loginFormValidateEmail = (values) => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = "Required";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = "Invalid email address";
-    }
-    return errors;
-  };
-  const loginFormValidatePassword = (values) => {
-    if (!values) return "Required";
   };
 
   return (

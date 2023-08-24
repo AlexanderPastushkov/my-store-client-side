@@ -26,7 +26,6 @@ const ProductItem = (props) => {
     <div>
       <div className={s.product}>
         <div className={s.productInfo}>
-          {/* <div className={s.title}>category: {category}</div> */}
           <div className={s.price}>price: {price}$</div>
           <div className={s.title}>{name}</div>
         </div>
