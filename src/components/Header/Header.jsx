@@ -1,5 +1,5 @@
 import logo from "../../Images/HeaderImg/LogoClothing.png";
-import Search from "../Common/Search/Search";
+import Search from "./Search/Search";
 
 import CartImage from "./Cart/CartImage/CartImage.jsx";
 import s from "./Header.module.css";

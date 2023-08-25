@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
+
 import {
   CART_ROUTE,
   CATALOG_ROUTE,

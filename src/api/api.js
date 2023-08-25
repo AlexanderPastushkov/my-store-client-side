@@ -18,19 +18,10 @@ export const productsAPI = {
   getFilteredItems(value) {
     if (value)
       return $host
-        .get("/api/product")
+        .get(`/api/product?name=${value}`)
         .then((response) => response.data)
-        .then((data) => {
-          console.log(data);
-          return data.rows.filter((product) => {
-            return (
-              product &&
-              product.name &&
-              product.name.toLowerCase().includes(value.toLowerCase())
-            );
-          });
-        });
-  }, //will try to fix soon
+        .then((data) => data);
+  },
   getAllItems() {
     return $host.get("/api/product").then((response) => response.data);
   },
