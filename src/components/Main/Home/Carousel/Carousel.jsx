@@ -28,7 +28,11 @@ const Carousel = ({ products }) => {
       <div className={s.carousel}>
         <div
           className={s.carouselInner}
-          style={{ backgroundImage: `url(${arrayOfSlides[currImg].img})` }}
+          style={{
+            backgroundImage: `url(${
+              process.env.REACT_APP_API_URL + arrayOfSlides[currImg].img
+            })`,
+          }}
         >
           <div onClick={goToPrevious} className={s.left}>
             <FaAngleLeft />

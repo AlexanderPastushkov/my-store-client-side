@@ -4,3 +4,6 @@ export const getProducts = (state) => {
 export const getCarouselProducts = (state) => {
   return state.productsPage.carouselProducts;
 };
+export const getBrands = (state) => {
+  return state.productsPage.brands;
+};

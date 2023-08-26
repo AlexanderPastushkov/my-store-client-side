@@ -16,7 +16,7 @@ export const CarouselContainer = () => {
     //   .then((data) => dispatch(setCarouselProducts(data.rows)));
     dispatch(requestAllProducts());
   }, []);
-  const products = useSelector((state) => getCarouselProducts(state));
+  const products = useSelector(getCarouselProducts);
 
   if (products.length === 0) {
     return <div>LOADING...</div>;

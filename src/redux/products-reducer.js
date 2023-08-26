@@ -1,10 +1,12 @@
 import { productsAPI } from "../api/api";
 const SET_PRODUCTS = "products/SET_PRODUCTS";
 const SET_CAROUSEL_PRODUCTS = "products/SET_CAROUSEL_PRODUCTS";
+const SET_BRANDS = "products/SET_BRANDS";
 
 let initialState = {
   products: [],
   carouselProducts: [],
+  brands: [],
 };
 
 const productsReducer = (state = initialState, action) => {
@@ -13,6 +15,8 @@ const productsReducer = (state = initialState, action) => {
       return { ...state, products: action.products };
     case SET_CAROUSEL_PRODUCTS:
       return { ...state, carouselProducts: action.items };
+    case SET_BRANDS:
+      return { ...state, brands: action.brands };
     default:
       return state;
   }
@@ -30,6 +34,13 @@ export const setCarouselProducts = (items) => {
     items,
   };
 };
+export const setBrands = (brands) => {
+  return {
+    type: SET_BRANDS,
+    brands,
+  };
+};
+
 //========================================================================================================================================================
 //thunk-creators
 export const requestFilteredProducts = (value) => {
@@ -46,5 +57,11 @@ export const requestAllProducts = () => {
     dispatch(setCarouselProducts(data));
   };
 };
-
+export const requestAllBrands = () => {
+  return async (dispatch) => {
+    let data = await productsAPI.getAllBrands(); //axios.create -> we make request from DAL
+    console.log(data);
+    dispatch(setBrands(data));
+  };
+};
 export default productsReducer;

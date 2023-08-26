@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { withRouter } from "../../../Hoc/withRouter";
+import { withRouter } from "../../../Hoc/withRouter"; //also we can use hook useParams from react-router-dom
 import { Image } from "../../Common/Image/Image";
 import s from "./ProductPage.module.css";
 

@@ -25,6 +25,9 @@ export const productsAPI = {
   getAllItems() {
     return $host.get("/api/product").then((response) => response.data);
   },
+  getAllBrands() {
+    return $host.get("/api/brand").then((response) => response.data);
+  },
 };
 
 export { $host, $authHost };

@@ -56,7 +56,9 @@ export function App() {
             path={CART_ROUTE}
             element={<Cart basketItems={basketItems} />}
           />
-          <Route path={CATALOG_ROUTE} element={<Catalog onAdd={onAdd} />} />
+          <Route path={CATALOG_ROUTE} element={<Catalog onAdd={onAdd} />}>
+            <Route path=":id" element={<Catalog onAdd={onAdd} />} />
+          </Route>
           <Route path={LOGIN_ROUTE} element={<AuthContainer />} />
           <Route path={REGISTRATION_ROUTE} element={<AuthContainer />} />
           <Route path={PRODUCT_ROUTE} element={<ProductItem onAdd={onAdd} />}>

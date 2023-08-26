@@ -1,0 +1,30 @@
+import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
+import s from "./BrandBar.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getBrands } from "../../../redux/products-selectors";
+import { requestAllBrands } from "../../../redux/products-reducer";
+import { CATALOG_ROUTE } from "../../../Utils/consts";
+
+export const BrandBar = () => {
+  const activeLink = ({ isActive }) => (isActive ? s.active : s.item); //isActive - atribute of Navlink
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(requestAllBrands());
+  }, []);
+  const brands = useSelector(getBrands);
+  if (brands.length === 0) {
+    return <div>LOADING...</div>;
+  }
+  return (
+    <nav className={s.nav}>
+      <ul className={s.brandList}>
+        {brands.map((brand) => (
+          <li>
+            <NavLink to={CATALOG_ROUTE + brand.id}>{brand.name}</NavLink>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};

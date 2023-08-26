@@ -1,0 +1,28 @@
+.active {
+  color: #36f4da;
+}
+.item {
+  color: #fff;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+
+.nav {
+  grid-area: n;
+  background-color: rgb(13, 125, 217);
+
+  padding-left: 10px;
+}
+ul li {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+  list-style-type: none;
+}
+.brandList {
+  display: flex;
+  gap: 10px;
+}
+.brandList li {
+  border: 1px solid #333;
+  padding: 8px;
+}
