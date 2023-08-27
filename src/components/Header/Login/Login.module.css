@@ -1,6 +1,6 @@
 .logoutBtn {
-  background-color: #014487;
-  color: #fff;
+  background-color: var(--btnBackgroundColor);
+  color: var(--main-color);
   transition: all 0.3s ease 0s;
   padding: 8px;
   border-radius: 10px;
