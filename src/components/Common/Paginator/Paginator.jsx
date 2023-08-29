@@ -36,6 +36,7 @@ const Paginator = ({
           className={s.btn}
           onClick={() => {
             setPortionNumber(portionNumber - 1);
+            onPageChanged(currentPage - 1);
           }}
         >
           PREV
@@ -61,6 +62,7 @@ const Paginator = ({
           className={s.btn}
           onClick={() => {
             setPortionNumber(portionNumber + 1);
+            onPageChanged(currentPage + 1);
           }}
         >
           NEXT

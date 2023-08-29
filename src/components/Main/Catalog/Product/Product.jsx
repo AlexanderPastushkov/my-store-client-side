@@ -1,9 +1,10 @@
-import React from "react";
-import s from "./Product.module.css";
 import { NavLink } from "react-router-dom";
+import { Image } from "../../../Common/Image/Image";
+import s from "./Product.module.css";
 
 export default function Product({ product, onAdd }) {
   const { img, name, priceTotal, price, id, count } = product;
+
   return (
     <section>
       <div className={s.product}>
@@ -11,11 +12,7 @@ export default function Product({ product, onAdd }) {
           {name}
         </NavLink>
         <div className={s.image}>
-          <img
-            className={s.img}
-            src={`http://localhost:3000/${img}`}
-            alt={name}
-          />
+          <Image img={img} name={name} />
         </div>
 
         <div className={s.price}>$ {price}</div>

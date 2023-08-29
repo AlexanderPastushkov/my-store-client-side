@@ -1,9 +1,10 @@
 import logo from "../../Images/HeaderImg/LogoClothing.png";
-import Search from "../Common/Search/Search";
+import Search from "./Search/Search";
 
 import CartImage from "./Cart/CartImage/CartImage.jsx";
 import s from "./Header.module.css";
-import Nav from "./Nav/Nav.jsx";
+import { LoginBtnContainer } from "./Login/LoginBtnContainer";
+import { Nav } from "./Nav/Nav.jsx";
 
 const Header = ({ countCartItems }) => {
   return (
@@ -14,6 +15,7 @@ const Header = ({ countCartItems }) => {
         </div>
         <Nav />
         <Search />
+        <LoginBtnContainer />
         <CartImage countCartItems={countCartItems} />
       </div>
     </header>

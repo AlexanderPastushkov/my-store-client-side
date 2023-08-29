@@ -1,18 +1,36 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router";
-import { CATALOG_ROUTE, LOGIN_ROUTE } from "../../Utils/consts";
-import { login, registration } from "../../api/userAPI";
+
+import {
+  CATALOG_ROUTE,
+  LOGIN_ROUTE,
+  REGISTRATION_ROUTE,
+} from "../../Utils/consts";
+
 import s from "./Auth.module.css";
 import { Field, Form, Formik } from "formik";
-import { Navigate } from "react-router-dom";
+import { NavLink, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { login, registration } from "../../api/userAPI";
 
-export const Auth = () => {
+export const Auth = ({ setUserData, isLogin }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location);
+  const isAuth = location.pathname === LOGIN_ROUTE;
   const click = async (values, { setSubmitting }) => {
-    const response = await registration(values.email, values.password);
-    setSubmitting(false);
-    console.log(response);
+    try {
+      let data;
+      if (isAuth) {
+        data = await login(values.email, values.password);
+      } else {
+        data = await registration(values.email, values.password);
+      }
+      setUserData(values.email, values.password, true);
+      setSubmitting(false);
+      navigate(CATALOG_ROUTE);
+    } catch (e) {
+      alert(e.response.data.message);
+    }
   };
-
   const loginFormValidateEmail = (values) => {
     const errors = {};
     if (!values.email) {
@@ -26,7 +44,7 @@ export const Auth = () => {
     if (!values) return "Required";
   };
 
-  // if (isLogin) {
+  // if (isAuth) {
   //   return <Navigate to={CATALOG_ROUTE} />;
   // }
 
@@ -52,6 +70,7 @@ export const Auth = () => {
           /* and other goodies */
         }) => (
           <Form className={s.formBlock}>
+            <h2>{isAuth ? "Login" : "Registration"}</h2>
             <div className={s.emailBlock}>
               <label className={s.loginLabel}>Email</label>
               <Field className={s.field} type="email" name="email" />
@@ -74,9 +93,32 @@ export const Auth = () => {
             {/* <label className={s.loginLabel}>Remember me</label>
             <Field type="checkbox" name="rememberMe" /> */}
 
-            <button className={s.button} type="submit" disabled={isSubmitting}>
-              Login
-            </button>
+            {isAuth ? (
+              <button
+                className={s.button}
+                type="submit"
+                disabled={isSubmitting}
+              >
+                Login
+              </button>
+            ) : (
+              <button
+                className={s.button}
+                type="submit"
+                disabled={isSubmitting}
+              >
+                Register
+              </button>
+            )}
+            {isAuth ? (
+              <div>
+                no account? <NavLink to={REGISTRATION_ROUTE}>register</NavLink>
+              </div>
+            ) : (
+              <div>
+                have account? <NavLink to={LOGIN_ROUTE}>login</NavLink>
+              </div>
+            )}
           </Form>
         )}
       </Formik>

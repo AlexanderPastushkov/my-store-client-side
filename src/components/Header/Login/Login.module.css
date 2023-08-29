@@ -1,0 +1,15 @@
+.logoutBtn {
+  background-color: var(--btnBackgroundColor);
+  color: var(--main-color);
+  transition: var(--transition);
+  padding: var(--btnPadding);
+  border-radius: var(--borderRadius);
+}
+.logoutBtn:hover {
+  background-color: #7a87ea;
+}
+.logoutItems {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}

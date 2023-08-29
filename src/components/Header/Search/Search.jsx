@@ -4,26 +4,26 @@ import s from "./SearchBar.module.css";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useDebounce } from "../../../Hooks/useDebounce";
-import { requestFilteredProducts } from "../../../redux/products-reducer";
+import {
+  requestFilteredProducts,
+  setProducts,
+} from "../../../redux/products-reducer";
 import { getProducts } from "../../../redux/products-selectors";
 
-const Search = ({ products, requestFilteredProducts }) => {
+const Search = ({ products, requestFilteredProducts, setProducts }) => {
   const [wordEntered, setWordEntered] = useState("");
 
   const debouncedWordEntered = useDebounce(wordEntered, 500);
-  const [filteredData, setFilteredData] = useState([]);
-
   useEffect(() => {
     if (debouncedWordEntered) {
       requestFilteredProducts(debouncedWordEntered);
-      setFilteredData(products);
     } else {
-      setFilteredData([]);
+      setProducts([]);
     }
   }, [debouncedWordEntered]);
 
   const clearInput = () => {
-    setFilteredData([]);
+    setProducts([]);
     setWordEntered("");
   };
   return (
@@ -36,16 +36,16 @@ const Search = ({ products, requestFilteredProducts }) => {
           className={s.inputSearch}
           value={wordEntered}
         />
-        {filteredData.length === 0 ? (
+        {products.length === 0 ? (
           <FaSearch id="search-icon" className={s.searchIcon} />
         ) : (
           <FaRegWindowClose onClick={clearInput} className={s.clearBtn} />
         )}
         <div className={s.searchIcon}></div>
       </div>
-      {filteredData.length !== 0 && (
+      {products.length !== 0 && (
         <div className={s.resultsList}>
-          {filteredData.map((el) => (
+          {products.map((el) => (
             <NavLink
               className={s.searchResult}
               to={`/product/${el.id}`}
@@ -68,5 +68,6 @@ let mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   requestFilteredProducts,
+  setProducts,
 })(Search);
 //========================================================================================================================================================

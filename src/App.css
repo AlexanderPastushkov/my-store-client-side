@@ -54,10 +54,11 @@ h6 {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  color: #fff;
+  color: var(--main-color);
 }
 .wrapper_content {
-  background-color: rgb(101, 143, 190);
-  color: #fff;
+  background-color: var(--main-bgColor);
+  color: var(--main-color);
   font-weight: bold;
+  padding: 0 15px;
 }

@@ -1,0 +1,8 @@
+:root {
+  --main-color: #ffffff;
+  --main-bgColor: rgb(101, 143, 190);
+  --transition: all 0.3s ease 0s;
+  --btnBackgroundColor: #014487;
+  --btnPadding: 8px;
+  --borderRadius: 10px;
+}

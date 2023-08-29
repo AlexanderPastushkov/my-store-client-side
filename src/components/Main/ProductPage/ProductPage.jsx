@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { withRouter } from "../../../Hoc/withRouter";
+import { useEffect, useState } from "react";
+import { withRouter } from "../../../Hoc/withRouter"; //also we can use hook useParams from react-router-dom
+import { Image } from "../../Common/Image/Image";
 import s from "./ProductPage.module.css";
 
 const ProductItem = (props) => {
@@ -20,11 +21,11 @@ const ProductItem = (props) => {
   };
   console.log(productItem);
   const { price, name, img } = productItem;
+
   return (
     <div>
       <div className={s.product}>
         <div className={s.productInfo}>
-          {/* <div className={s.title}>category: {category}</div> */}
           <div className={s.price}>price: {price}$</div>
           <div className={s.title}>{name}</div>
         </div>
@@ -34,11 +35,7 @@ const ProductItem = (props) => {
           </button>
         </div>
         <div className={s.image}>
-          <img
-            className={s.img}
-            src={`http://localhost:3000/${img}`}
-            alt={name}
-          />
+          <Image img={img} name={name} />
         </div>
       </div>
       {/* <div>{description}</div> */}

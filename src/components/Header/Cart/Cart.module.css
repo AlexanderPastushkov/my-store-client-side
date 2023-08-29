@@ -1,16 +1,15 @@
 .cart {
   margin: 0 auto;
   text-align: center;
-  height: 100vh;
 }
-.productImg {
+/* .productImg {
   max-width: 200px;
   max-height: 200px;
-}
+} */
 
 .productImg img {
-  width: 100%;
-  height: 100%;
+  width: 100px;
+  height: 100px;
 }
 .deleteBtn {
   width: 30px;

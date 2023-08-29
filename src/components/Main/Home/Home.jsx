@@ -1,14 +1,12 @@
-import React from "react";
-import { ImageSlider } from "./Slider/ImageSlider";
-import Carousel from "./Carousel/Carousel";
-import s from "./Home.module.css";
 import BigSales from "./BigSales/BigSales";
+import { CarouselContainer } from "./Carousel/CarouselContainer";
+import s from "./Home.module.css";
 
 export default function Home() {
   return (
     <div>
       <div className={s.carouselParent}>
-        <Carousel />
+        <CarouselContainer />
       </div>
       <BigSales />
     </div>

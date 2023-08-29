@@ -1,0 +1,32 @@
+.active {
+  color: #36f4da;
+}
+.item {
+  color: #fff;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+
+.brand-nav {
+  grid-area: n;
+
+  padding-left: 10px;
+}
+
+.brand-list {
+  display: flex;
+  gap: 10px;
+}
+.brand-list li {
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 8px;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+  list-style-type: none;
+  background-color: var(--main-bgColor);
+  transition: var(--transition);
+}
+.brand-list li:hover {
+  background-color: #1265b8;
+}

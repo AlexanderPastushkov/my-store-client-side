@@ -9,18 +9,19 @@ const basketReducer = (state = initialState, action) => {
     case ADD_PRODUCT: {
       return {
         ...state,
-        basketItems: action.items,
+        basketItems: action.product,
       };
     }
+
     default:
       return state;
   }
 };
 
-export const setBasketItems = (items) => {
+export const setBasketItems = (product) => {
   return {
     type: ADD_PRODUCT,
-    items,
+    product,
   };
 };
 
