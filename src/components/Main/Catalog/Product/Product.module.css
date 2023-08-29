@@ -4,8 +4,8 @@
   grid-template-columns: repeat(3, 1fr);
 }
 .image {
-  max-width: 200px;
-  max-height: 200px;
+  width: 250px;
+  height: 300px;
 }
 
 .img {

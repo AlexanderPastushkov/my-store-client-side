@@ -12,6 +12,7 @@ const basketReducer = (state = initialState, action) => {
         basketItems: action.product,
       };
     }
+
     default:
       return state;
   }

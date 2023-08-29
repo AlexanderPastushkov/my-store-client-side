@@ -1,9 +1,9 @@
 .logoutBtn {
   background-color: var(--btnBackgroundColor);
   color: var(--main-color);
-  transition: all 0.3s ease 0s;
-  padding: 8px;
-  border-radius: 10px;
+  transition: var(--transition);
+  padding: var(--btnPadding);
+  border-radius: var(--borderRadius);
 }
 .logoutBtn:hover {
   background-color: #7a87ea;

@@ -57,7 +57,8 @@ h6 {
   color: var(--main-color);
 }
 .wrapper_content {
-  background-color: rgb(101, 143, 190);
+  background-color: var(--main-bgColor);
   color: var(--main-color);
   font-weight: bold;
+  padding: 0 15px;
 }
