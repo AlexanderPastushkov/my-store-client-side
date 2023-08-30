@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { withRouter } from "../../../Hoc/withRouter"; //also we can use hook useParams from react-router-dom
 import { Image } from "../../Common/Image/Image";
-import s from "./ProductPage.module.css";
+import s from "./ProductItem.module.css";
+import { useDispatch } from "react-redux";
+import { addProductToBasket } from "../../../redux/basket-reducer";
 
 const ProductItem = (props) => {
   const [productItem, setProductItem] = useState({});
@@ -19,7 +21,7 @@ const ProductItem = (props) => {
     };
     fetchData();
   };
-  console.log(productItem);
+  const dispatch = useDispatch();
   const { price, name, img } = productItem;
 
   return (
@@ -30,7 +32,10 @@ const ProductItem = (props) => {
           <div className={s.title}>{name}</div>
         </div>
         <div className={s.addButton}>
-          <button onClick={() => props.onAdd(productItem)} className={s.btn}>
+          <button
+            onClick={() => dispatch(addProductToBasket(productItem))}
+            className={s.btn}
+          >
             add to cart
           </button>
         </div>

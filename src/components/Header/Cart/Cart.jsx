@@ -3,8 +3,6 @@ import Title from "./Title/Title";
 import s from "./Cart.module.css";
 import CartProduct from "./CartProduct/CartProduct";
 import CartFooter from "./CartFooter/CartFooter";
-import { useDispatch } from "react-redux";
-import { setBasketItems } from "../../../redux/basket-reducer";
 
 export function Cart({ basketItems }) {
   const [total, setTotal] = useState({
@@ -20,77 +18,9 @@ export function Cart({ basketItems }) {
       count: basketItems.reduce((prev, curr) => prev + curr.count, 0),
     });
   }, [basketItems]);
-  const dispatch = useDispatch();
-  const deleteProduct = (id) => {
-    dispatch(
-      setBasketItems((basketItems) => {
-        return basketItems.filter((product) => id !== product.id);
-      })
-    );
-  };
-  const increase = (id) => {
-    dispatch(
-      setBasketItems((basketItems) => {
-        basketItems.map((product) => {
-          if (product.id === id && product.count < 10) {
-            return {
-              ...product,
-              count: product.count + 1,
-              priceTotal: ((product.count + 1) * product.price).toFixed(2),
-            };
-          }
-          return product;
-        });
-      })
-    );
-  };
-
-  const decrease = (id) => {
-    dispatch(
-      setBasketItems((basketItems) => {
-        return basketItems.map((product) => {
-          if (product.id === id && product.count > 1) {
-            return {
-              ...product,
-              count: product.count - 1,
-              priceTotal: ((product.count - 1) * product.price).toFixed(2),
-            };
-          }
-          return product;
-        });
-      })
-    );
-  };
-
-  const changeValue = (id, value) => {
-    if (value <= 10)
-      dispatch(
-        setBasketItems((basketItems) => {
-          return basketItems.map((product) => {
-            if (product.id === id) {
-              return {
-                ...product,
-                count: value,
-                priceTotal: (value * product.price).toFixed(2),
-              };
-            }
-            return product;
-          });
-        })
-      );
-  };
 
   const products = basketItems.map((product) => {
-    return (
-      <CartProduct
-        deleteProduct={deleteProduct}
-        product={product}
-        key={product.id}
-        increase={increase}
-        decrease={decrease}
-        changeValue={changeValue}
-      />
-    );
+    return <CartProduct product={product} key={product.id} />;
   });
 
   return (

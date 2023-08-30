@@ -2,8 +2,15 @@ import React from "react";
 import s from "../Cart.module.css";
 import upArrow from "../../../../Images/Cart/up-arrow.svg";
 import downArrow from "../../../../Images/Cart/down-arrow.svg";
+import {
+  changeValueOfBasketItems,
+  decreaseBasketItems,
+  increaseBasketItems,
+} from "../../../../redux/basket-reducer";
+import { useDispatch } from "react-redux";
 
-export default function Count({ increase, count, id, decrease, changeValue }) {
+export default function Count({ count, product }) {
+  const dispatch = useDispatch();
   return (
     <div className={s.productCount}>
       <div className={s.count}>
@@ -14,7 +21,7 @@ export default function Count({ increase, count, id, decrease, changeValue }) {
           value={count}
           type="number"
           onChange={(e) => {
-            changeValue(id, +e.target.value);
+            dispatch(changeValueOfBasketItems(product.id, +e.target.value));
           }}
         />
       </div>
@@ -23,7 +30,7 @@ export default function Count({ increase, count, id, decrease, changeValue }) {
           <button
             className={s.countBtn}
             onClick={() => {
-              increase(id);
+              dispatch(increaseBasketItems(product));
             }}
           >
             <img className={s.arrBtn} src={upArrow} alt="increase" />
@@ -32,7 +39,7 @@ export default function Count({ increase, count, id, decrease, changeValue }) {
         <div>
           <button
             onClick={() => {
-              decrease(id);
+              dispatch(decreaseBasketItems(product));
             }}
             className={s.countBtn}
           >
