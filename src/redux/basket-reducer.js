@@ -18,8 +18,8 @@ const basketReducer = (state = initialState, action) => {
               x.id === action.product.id
                 ? {
                     ...x,
-                    count: ++x.count,
-                    priceTotal: x.priceTotal + x.price,
+                    count: ++action.product.count,
+                    priceTotal: action.product.count * action.product.price,
                   }
                 : x
             )
@@ -47,8 +47,11 @@ const basketReducer = (state = initialState, action) => {
           x.id === action.product.id && x.count > 1
             ? {
                 ...x,
-                count: x.count - 1,
-                priceTotal: ((x.count - 1) * x.price).toFixed(2),
+                count: action.product.count - 1,
+                priceTotal: (
+                  (action.product.count - 1) *
+                  action.product.price
+                ).toFixed(2),
               }
             : x
         ),
@@ -60,9 +63,9 @@ const basketReducer = (state = initialState, action) => {
         basketItems: state.basketItems.map((x) =>
           x.id === action.product.id && x.count < 10
             ? {
-                ...x,
-                count: x.count + 1,
-                priceTotal: ((x.count + 1) * x.price).toFixed(2),
+                ...action.product,
+                count: action.product.count + 1,
+                priceTotal: ((action.product.count + 1) * x.price).toFixed(2),
               }
             : x
         ),
