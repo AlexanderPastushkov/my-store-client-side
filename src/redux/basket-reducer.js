@@ -18,8 +18,9 @@ const basketReducer = (state = initialState, action) => {
               x.id === action.product.id
                 ? {
                     ...x,
-                    count: ++x.count,
-                    priceTotal: x.priceTotal + x.price,
+                    count: ++action.product.count,
+                    priceTotal:
+                      action.product.priceTotal + action.product.price,
                   }
                 : x
             )

@@ -4,6 +4,8 @@ import { Image } from "../../Common/Image/Image";
 import s from "./ProductItem.module.css";
 import { useDispatch } from "react-redux";
 import { addProductToBasket } from "../../../redux/basket-reducer";
+import { Comments } from "./Comments/Comments";
+import { CommentsForm } from "./Comments/CommentsForm";
 
 const ProductItem = (props) => {
   const [productItem, setProductItem] = useState({});
@@ -43,7 +45,14 @@ const ProductItem = (props) => {
           <Image img={img} name={name} />
         </div>
       </div>
-      {/* <div>{description}</div> */}
+      <div>
+        <div>
+          <Comments />
+        </div>
+        <div>
+          <CommentsForm />
+        </div>
+      </div>
     </div>
   );
 };
