@@ -1,6 +1,6 @@
 .form {
   display: flex;
-
+  margin-bottom: 15px;
   justify-content: center;
 }
 
@@ -51,4 +51,38 @@
   .form {
     display: block;
   }
+}
+.emojiIcon {
+  cursor: pointer;
+  position: absolute;
+  top: 7px;
+  right: 65px;
+  z-index: 10;
+}
+.pickerContainer {
+  position: relative;
+  width: 300px;
+  display: flex;
+  align-items: start;
+}
+.commentItems {
+  display: flex;
+}
+.commentItems p {
+  margin-right: 10px;
+}
+.commentTitle {
+  background-color: #f4a4a4;
+  border-radius: 10px;
+  padding: 5px;
+}
+.comment {
+  background-color: #10c3b7;
+  border-radius: var(--borderRadius);
+  padding: 5px;
+}
+.commentsList {
+  border: 1px solid #333;
+  padding: var(--btnPadding);
+  border-radius: var(--borderRadius);
 }

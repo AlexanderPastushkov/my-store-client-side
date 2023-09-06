@@ -2,28 +2,34 @@ import { useEffect, useState } from "react";
 import { withRouter } from "../../../Hoc/withRouter"; //also we can use hook useParams from react-router-dom
 import { Image } from "../../Common/Image/Image";
 import s from "./ProductItem.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProductToBasket } from "../../../redux/basket-reducer";
 import { Comments } from "./Comments/Comments";
 import { CommentsForm } from "./Comments/CommentsForm";
+import { takeComments } from "../../../toolkitRedux/commentsSliceSelectors";
+import { setComments } from "../../../toolkitRedux/commentsSlice";
+import { useParams } from "react-router-dom";
+import { CommentsFormWithoutFormik } from "./Comments/CommentsFormWithoutFormik";
 
-const ProductItem = (props) => {
+const ProductItem = () => {
   const [productItem, setProductItem] = useState({});
+  const params = useParams();
+  console.log(params);
+  const dispatch = useDispatch();
   useEffect(() => {
     refreshProduct();
-  }, [props.match.params.id]);
+  }, [params.id]);
 
   const refreshProduct = () => {
-    let id = props.match.params.id; //wrap in withRouter
-    const fetchData = async () => {
+    const fetchData = async (id) => {
       const response = await fetch(`/api/product/${id}`);
       const json = await response.json();
 
       setProductItem(json);
     };
-    fetchData();
+    fetchData(params.id);
   };
-  const dispatch = useDispatch();
+
   const { price, name, img } = productItem;
 
   return (
@@ -45,16 +51,14 @@ const ProductItem = (props) => {
           <Image img={img} name={name} />
         </div>
       </div>
-      <div>
+      <>
         <div>
-          <Comments />
+          <CommentsForm id={params.id} />
         </div>
-        <div>
-          <CommentsForm />
-        </div>
-      </div>
+        <div>{/* <Comments id={params.id} /> */}</div>
+      </>
     </div>
   );
 };
 
-export default withRouter(ProductItem);
+export default ProductItem;
