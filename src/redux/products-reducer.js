@@ -3,6 +3,11 @@ const SET_PRODUCTS = "products/SET_PRODUCTS";
 const SET_CAROUSEL_PRODUCTS = "products/SET_CAROUSEL_PRODUCTS";
 const SET_BRANDS = "products/SET_BRANDS";
 
+// type InitialStateType = {
+//   products:
+
+// }
+
 let initialState = {
   products: [],
   carouselProducts: [],
