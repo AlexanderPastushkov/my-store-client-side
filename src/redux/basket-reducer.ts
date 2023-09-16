@@ -1,3 +1,5 @@
+import { ProductsType } from "../Types/types.js";
+
 const ADD_PRODUCT: string = "basket-reducer/ADD_PRODUCT";
 const DELETE_PRODUCT: string = "basket-reducer/DELETE_PRODUCT";
 const DECREASE_PRODUCT: string = "basket-reducer/DECREASE_PRODUCT";
@@ -7,18 +9,9 @@ const CHANGE_VALUE: string = "basket-reducer/CHANGE_VALUE";
 let initialState: InitialStateType = {
   basketItems: [],
 };
-type BasketItemsType = {
-  id: number;
-  name: string;
-  price: number;
-  count: number;
-  priceTotal: number;
-  brandId: number;
-  typeId: number;
-  info: Array<string>;
-};
+
 type InitialStateType = {
-  basketItems: Array<BasketItemsType>;
+  basketItems: Array<ProductsType>;
 };
 
 const basketReducer = (state = initialState, action: any): InitialStateType => {

@@ -12,6 +12,9 @@ const persistConfig = {
   key: "root",
   storage,
 };
+
+type ReducerType = typeof reducer;
+export type AppStateType = ReturnType<ReducerType>;
 const reducer = combineReducers({
   commentsPage: commentsSlice, //create with toolkit
   productsPage: productsReducer,
