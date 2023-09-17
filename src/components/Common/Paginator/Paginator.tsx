@@ -26,7 +26,7 @@ const Paginator: React.FC<PropsType> = ({
   }
 
   let portionCount = Math.ceil(pagesCount / portionSize); //quantity of portions, we divide our all pages on 10
-  let [portionNumber, setPortionNumber] = useState(
+  let [portionNumber, setPortionNumber] = useState<number>(
     Math.floor(currentPage / 10) + 1 //rounded to down 1.1--->1 ect.
   );
   useEffect(() => {

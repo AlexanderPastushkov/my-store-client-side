@@ -1,4 +1,4 @@
-import { BrandsType, ProductsType } from "../Types/types.js";
+import { BrandsType, ProductsType } from "../Types/types";
 import { productsAPI } from "../api/api";
 const SET_PRODUCTS = "products/SET_PRODUCTS";
 const SET_CAROUSEL_PRODUCTS = "products/SET_CAROUSEL_PRODUCTS";

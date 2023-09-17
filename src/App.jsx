@@ -12,7 +12,7 @@ import {
 } from "./Utils/consts";
 import AuthContainer from "./components/Auth/AuthContainer";
 import Footer from "./components/Footer/Footer.jsx";
-import { Cart } from "./components/Header/Cart/Cart.jsx";
+import { Cart } from "./components/Header/Cart/Cart";
 import Header from "./components/Header/Header";
 import Catalog from "./components/Main/Catalog/Catalog.jsx";
 import Home from "./components/Main/Home/Home.jsx";
