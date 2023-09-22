@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Title from "./Title/Title";
 import s from "./Cart.module.css";
-import CartProduct from "./CartProduct/CartProduct";
+import { CartProduct } from "./CartProduct/CartProduct";
 import CartFooter from "./CartFooter/CartFooter";
+import { ProductsType } from "../../../Types/types.js";
 
-export function Cart({ basketItems }) {
+type Props = { basketItems: Array<ProductsType> };
+export const Cart = ({ basketItems }: Props) => {
   const [total, setTotal] = useState({
     price: basketItems.reduce((prev, curr) => prev + +curr.priceTotal, 0),
     count: basketItems.reduce((prev, curr) => prev + curr.count, 0),
@@ -19,7 +21,7 @@ export function Cart({ basketItems }) {
     });
   }, [basketItems]);
 
-  const products = basketItems.map((product) => {
+  const products = basketItems.map((product: ProductsType) => {
     return <CartProduct product={product} key={product.id} />;
   });
 
@@ -31,4 +33,4 @@ export function Cart({ basketItems }) {
       <CartFooter total={total} />
     </div>
   );
-}
+};

@@ -6,7 +6,7 @@ import { Image } from "../../../Common/Image/Image";
 import { useDispatch } from "react-redux";
 import { deleteBasketItems } from "../../../../redux/basket-reducer";
 
-export default function CartProduct({ product }) {
+export function CartProduct({ product }) {
   const { img, name, priceTotal, price, id, count } = product;
   const dispatch = useDispatch();
   return (

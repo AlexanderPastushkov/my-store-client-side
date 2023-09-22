@@ -1,15 +1,27 @@
+import { BrandsType, ProductsType } from "../Types/types";
 import { productsAPI } from "../api/api";
 const SET_PRODUCTS = "products/SET_PRODUCTS";
 const SET_CAROUSEL_PRODUCTS = "products/SET_CAROUSEL_PRODUCTS";
 const SET_BRANDS = "products/SET_BRANDS";
-
-let initialState = {
+type CarouselProducts = {
+  count: number;
+  rows: Array<ProductsType>;
+};
+type InitialStateType = {
+  products: Array<ProductsType>;
+  carouselProducts: CarouselProducts | object;
+  brands: Array<BrandsType>;
+};
+let initialState: InitialStateType = {
   products: [],
-  carouselProducts: [],
+  carouselProducts: {},
   brands: [],
 };
 
-const productsReducer = (state = initialState, action) => {
+const productsReducer = (
+  state = initialState,
+  action: any
+): InitialStateType => {
   switch (action.type) {
     case SET_PRODUCTS:
       return { ...state, products: action.products };
@@ -22,19 +34,35 @@ const productsReducer = (state = initialState, action) => {
   }
 };
 
-export const setProducts = (products) => {
+type SetProductsType = {
+  type: typeof SET_PRODUCTS;
+  products: Array<ProductsType>;
+};
+export const setProducts = (products: Array<ProductsType>): SetProductsType => {
   return {
     type: SET_PRODUCTS,
     products,
   };
 };
-export const setCarouselProducts = (items) => {
+
+type SetCarouselProductsType = {
+  type: typeof SET_CAROUSEL_PRODUCTS;
+  items: Array<ProductsType>;
+};
+export const setCarouselProducts = (
+  items: Array<ProductsType>
+): SetCarouselProductsType => {
   return {
     type: SET_CAROUSEL_PRODUCTS,
     items,
   };
 };
-export const setBrands = (brands) => {
+
+type SetBrandsType = {
+  type: typeof SET_BRANDS;
+  brands: Array<BrandsType>;
+};
+export const setBrands = (brands: Array<BrandsType>): SetBrandsType => {
   return {
     type: SET_BRANDS,
     brands,
@@ -43,22 +71,22 @@ export const setBrands = (brands) => {
 
 //========================================================================================================================================================
 //thunk-creators
-export const requestFilteredProducts = (value) => {
-  return async (dispatch) => {
+export const requestFilteredProducts = (value: string) => {
+  return async (dispatch: any) => {
     let data = await productsAPI.getFilteredItems(value); //axios.create -> we make request from DAL
     dispatch(setProducts(data));
   };
 }; //пример замыкания
 
 export const requestAllProducts = () => {
-  return async (dispatch) => {
+  return async (dispatch: any) => {
     let data = await productsAPI.getAllItems(); //axios.create -> we make request from DAL
     console.log(data);
     dispatch(setCarouselProducts(data));
   };
 };
 export const requestAllBrands = () => {
-  return async (dispatch) => {
+  return async (dispatch: any) => {
     let data = await productsAPI.getAllBrands(); //axios.create -> we make request from DAL
     console.log(data);
     dispatch(setBrands(data));
