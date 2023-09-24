@@ -1,0 +1,10 @@
+.inputStar {
+  opacity: 0;
+  display: none;
+}
+.starItems {
+  display: flex;
+}
+.star {
+  cursor: pointer;
+}
