@@ -1,5 +1,8 @@
+import { Dispatch } from "redux";
 import { BrandsType, ProductsType } from "../Types/types";
 import { productsAPI } from "../api/api";
+import { AppStateType } from "../toolkitRedux/index.js";
+import { ThunkAction } from "redux-thunk";
 const SET_PRODUCTS = "products/SET_PRODUCTS";
 const SET_CAROUSEL_PRODUCTS = "products/SET_CAROUSEL_PRODUCTS";
 const SET_BRANDS = "products/SET_BRANDS";
@@ -20,7 +23,7 @@ let initialState: InitialStateType = {
 
 const productsReducer = (
   state = initialState,
-  action: any
+  action: ActionsTypes
 ): InitialStateType => {
   switch (action.type) {
     case SET_PRODUCTS:
@@ -34,6 +37,7 @@ const productsReducer = (
   }
 };
 
+type ActionsTypes = SetProductsType | SetCarouselProductsType | SetBrandsType;
 type SetProductsType = {
   type: typeof SET_PRODUCTS;
   products: Array<ProductsType>;
@@ -71,22 +75,33 @@ export const setBrands = (brands: Array<BrandsType>): SetBrandsType => {
 
 //========================================================================================================================================================
 //thunk-creators
-export const requestFilteredProducts = (value: string) => {
-  return async (dispatch: any) => {
+
+type GetStateType = () => AppStateType;
+type DispatchType = Dispatch<ActionsTypes>;
+type ThunkType = ThunkAction<
+  Promise<void>,
+  AppStateType,
+  unknown,
+  ActionsTypes
+>;
+
+export const requestFilteredProducts = (value: string): ThunkType => {
+  return async (dispatch, getState) => {
     let data = await productsAPI.getFilteredItems(value); //axios.create -> we make request from DAL
     dispatch(setProducts(data));
   };
 }; //пример замыкания
 
-export const requestAllProducts = () => {
-  return async (dispatch: any) => {
+export const requestAllProducts = (): ThunkType => {
+  return async (dispatch) => {
     let data = await productsAPI.getAllItems(); //axios.create -> we make request from DAL
     console.log(data);
     dispatch(setCarouselProducts(data));
   };
 };
-export const requestAllBrands = () => {
-  return async (dispatch: any) => {
+export const requestAllBrands = (): ThunkType => {
+  return async (dispatch, getState) => {
+    // let a = getState().productsPage.brands
     let data = await productsAPI.getAllBrands(); //axios.create -> we make request from DAL
     console.log(data);
     dispatch(setBrands(data));

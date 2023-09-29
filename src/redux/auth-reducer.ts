@@ -1,5 +1,5 @@
-const SET_USER_DATA: string = "auth-reducer/SET_USER_DATA";
-const LOGOUT: string = "auth-reducer/LOGOUT";
+const SET_USER_DATA = "auth-reducer/SET_USER_DATA";
+const LOGOUT = "auth-reducer/LOGOUT";
 type InitialStateType = {
   email: null | string;
   password: null | string;
@@ -13,7 +13,7 @@ let initialState: InitialStateType = {
 
 export const authReducer = (
   state = initialState,
-  action: any
+  action: ActionsTypes
 ): InitialStateType => {
   switch (action.type) {
     case SET_USER_DATA:
@@ -26,10 +26,12 @@ export const authReducer = (
   }
 };
 
+type ActionsTypes = SetUserDataType | LogoutType;
+
 type SetUserDataActionPayloadType = {
   email: string | null;
   password: string | null;
-  isLogin: boolean | null;
+  isLogin: boolean;
 };
 
 type SetUserDataType = {
@@ -54,7 +56,7 @@ export const setUserData = (
 export const logout = (
   email: string | null,
   password: string | null,
-  isLogin: boolean | null
+  isLogin: boolean
 ): LogoutType => {
   return {
     type: LOGOUT,

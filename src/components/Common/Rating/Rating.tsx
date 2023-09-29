@@ -2,48 +2,47 @@ import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import s from "./Rating.module.css";
 
-import { setRating } from "../../../toolkitRedux/ratingSlice";
-import { useAppDispatch, useAppSelector } from "../../../Hooks/reduxHooks";
+import { useAppSelector } from "../../../Hooks/reduxHooks";
 import { takeRating } from "../../../toolkitRedux/ratingSliceSelectors";
 import { getIsLoginBollean } from "../../../redux/auth-selectors";
 import { useNavigate } from "react-router-dom";
 import { createRating } from "../../../api/ratingAPI.js";
 import { LOGIN_ROUTE } from "../../../Utils/consts.js";
 
-type Props = {
+interface Props {
   id: number;
   refreshRating: () => void;
-};
+}
 
-export const Rating: React.FC<Props> = ({ id, refreshRating }) => {
+export const Rating = ({ id, refreshRating }: Props) => {
   const [localRating, setLocalRating] = useState(0);
   const [hover, setHover] = useState(0);
+  const [isRated, setIsRated] = useState(false);
+  const createRate = async (id: number, localRating: number) => {
+    if (isLogin) {
+      await createRating(localRating, id);
+      refreshRating();
+      setIsRated(true);
+    } else {
+      navigateToRoute(LOGIN_ROUTE);
+    }
+  };
   useEffect(() => {
-    const createRate = async (id: number, localRating: number) => {
-      if (isLogin) {
-        await createRating(localRating, id);
-
-        refreshRating();
-      } else {
-        navigateToRoute(LOGIN_ROUTE);
-      }
-    };
-    if (localRating !== 0) {
+    if (localRating !== 0 && !isRated) {
       createRate(id, localRating);
     }
     refreshRating();
-  }, [id, localRating]);
+  }, [localRating]);
 
   const navigateToRoute = useNavigate();
   const isLogin = useAppSelector(getIsLoginBollean);
 
   const rating = useAppSelector(takeRating);
-  console.log(rating);
+
   const averageRate = +(
     rating.map((el) => el.rate).reduce((acc, cur) => acc + cur, 0) /
     rating.length
   ).toFixed(2);
-  console.log(averageRate);
 
   return (
     <>

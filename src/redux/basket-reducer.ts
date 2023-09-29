@@ -1,10 +1,10 @@
 import { ProductsType } from "../Types/types.js";
 
-const ADD_PRODUCT: string = "basket-reducer/ADD_PRODUCT";
-const DELETE_PRODUCT: string = "basket-reducer/DELETE_PRODUCT";
-const DECREASE_PRODUCT: string = "basket-reducer/DECREASE_PRODUCT";
-const INCREASE_PRODUCT: string = "basket-reducer/INCREASE_PRODUCT";
-const CHANGE_VALUE: string = "basket-reducer/CHANGE_VALUE";
+const ADD_PRODUCT = "basket-reducer/ADD_PRODUCT";
+const DELETE_PRODUCT = "basket-reducer/DELETE_PRODUCT";
+const DECREASE_PRODUCT = "basket-reducer/DECREASE_PRODUCT";
+const INCREASE_PRODUCT = "basket-reducer/INCREASE_PRODUCT";
+const CHANGE_VALUE = "basket-reducer/CHANGE_VALUE";
 
 let initialState: InitialStateType = {
   basketItems: [],
@@ -14,7 +14,10 @@ type InitialStateType = {
   basketItems: Array<ProductsType>;
 };
 
-const basketReducer = (state = initialState, action: any): InitialStateType => {
+const basketReducer = (
+  state = initialState,
+  action: ActionsTypes
+): InitialStateType => {
   switch (action.type) {
     case ADD_PRODUCT: {
       return {
@@ -71,7 +74,7 @@ const basketReducer = (state = initialState, action: any): InitialStateType => {
             ? {
                 ...action.product,
                 count: action.product.count + 1,
-                priceTotal: ((action.product.count + 1) * x.price).toFixed(2),
+                priceTotal: +((action.product.count + 1) * x.price).toFixed(2),
               }
             : x
         ),
@@ -91,11 +94,18 @@ const basketReducer = (state = initialState, action: any): InitialStateType => {
   }
 };
 
+type ActionsTypes =
+  | SetBasketItemsType
+  | DeleteBasketItemsType
+  | DecreaseBasketItemsType
+  | ChangeValueOfBasketItemsType
+  | IncreaseBasketItemsType;
+
 type SetBasketItemsType = {
   type: typeof ADD_PRODUCT;
-  product: any;
+  product: ProductsType;
 };
-export const setBasketItems = (product: any): SetBasketItemsType => {
+export const setBasketItems = (product: ProductsType): SetBasketItemsType => {
   return {
     type: ADD_PRODUCT,
     product,
@@ -106,7 +116,9 @@ type DeleteBasketItemsType = {
   type: typeof DELETE_PRODUCT;
   product: any;
 };
-export const deleteBasketItems = (product: any): DeleteBasketItemsType => {
+export const deleteBasketItems = (
+  product: ProductsType
+): DeleteBasketItemsType => {
   return {
     type: DELETE_PRODUCT,
     product,
@@ -117,16 +129,22 @@ type DecreaseBasketItemsType = {
   type: typeof DECREASE_PRODUCT;
   product: any;
 };
-export const decreaseBasketItems = (product: any): DecreaseBasketItemsType => {
+export const decreaseBasketItems = (
+  product: ProductsType
+): DecreaseBasketItemsType => {
   return {
     type: DECREASE_PRODUCT,
     product,
   };
 };
 
+type ChangeValuePayloadBasketItemsType = {
+  id: number;
+  value: number;
+};
 type ChangeValueOfBasketItemsType = {
-  type: typeof DECREASE_PRODUCT;
-  payload: { id: number; value: number };
+  type: typeof CHANGE_VALUE;
+  payload: ChangeValuePayloadBasketItemsType;
 };
 export const changeValueOfBasketItems = (
   id: number,
@@ -140,15 +158,18 @@ export const changeValueOfBasketItems = (
 
 type IncreaseBasketItemsType = {
   type: typeof INCREASE_PRODUCT;
-  product: any;
+  product: ProductsType;
 };
-export const increaseBasketItems = (product: any): IncreaseBasketItemsType => {
+export const increaseBasketItems = (
+  product: ProductsType
+): IncreaseBasketItemsType => {
   return {
     type: INCREASE_PRODUCT,
     product,
   };
 };
-export const addProductToBasket = (product: any) => (dispatch: any) => {
-  dispatch(setBasketItems(product));
-};
+export const addProductToBasket =
+  (product: ProductsType) => (dispatch: any) => {
+    dispatch(setBasketItems(product));
+  };
 export default basketReducer;
