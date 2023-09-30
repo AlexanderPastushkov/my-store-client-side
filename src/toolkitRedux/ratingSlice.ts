@@ -1,4 +1,3 @@
-// import { Rating } from "./../components/Common/Rating/Rating";
 import { createSlice } from "@reduxjs/toolkit";
 
 type Rating = {

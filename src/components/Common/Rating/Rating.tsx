@@ -6,7 +6,7 @@ import { useAppSelector } from "../../../Hooks/reduxHooks";
 import { takeRating } from "../../../toolkitRedux/ratingSliceSelectors";
 import { getIsLoginBollean } from "../../../redux/auth-selectors";
 import { useNavigate } from "react-router-dom";
-import { createRating } from "../../../api/ratingAPI.js";
+import { createRating } from "../../../api/ratingAPI";
 import { LOGIN_ROUTE } from "../../../Utils/consts.js";
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
   refreshRating: () => void;
 }
 
-export const Rating = ({ id, refreshRating }: Props) => {
+export const Rating: React.FC<Props> = ({ id, refreshRating }) => {
   const [localRating, setLocalRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [isRated, setIsRated] = useState(false);

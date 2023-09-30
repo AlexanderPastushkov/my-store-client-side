@@ -8,7 +8,7 @@ interface Props {
   id: number;
 }
 
-export const RatingContainer = ({ id }: Props) => {
+export const RatingContainer: React.FC<Props> = ({ id }) => {
   const dispatch = useAppDispatch();
 
   const refreshRating = () => {

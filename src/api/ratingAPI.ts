@@ -1,6 +1,6 @@
-import { $authHost, $host } from "./api.js";
+import { $authHost, $host } from "./api";
 
-export const createRating = async (rate, productID) => {
+export const createRating = async (rate: number, productID: number) => {
   const { data } = await $authHost.post("api/rating", {
     rate,
     productID,
@@ -13,7 +13,7 @@ export const getRatings = async () => {
   console.log(data);
   return data;
 };
-export const getRatingForProduct = async (id) => {
+export const getRatingForProduct = async (id: number) => {
   const { data } = await $host.get(`api/rating/${id}`);
   console.log(data);
   return data;

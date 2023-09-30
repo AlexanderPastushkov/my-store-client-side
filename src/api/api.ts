@@ -8,14 +8,14 @@ const $authHost = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 
-const authInterceptor = (config) => {
+const authInterceptor = (config: any) => {
   config.headers.authorization = `Bearer ${localStorage.getItem("token")}`;
   return config;
 };
 $authHost.interceptors.request.use(authInterceptor);
 
 export const productsAPI = {
-  getFilteredItems(value) {
+  getFilteredItems(value: string) {
     if (value)
       return $host
         .get(`/api/product?name=${value}`)

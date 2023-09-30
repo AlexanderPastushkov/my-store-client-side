@@ -1,8 +1,7 @@
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { LOGIN_ROUTE } from "../../Utils/consts";
-import { logout, setUserData } from "../../redux/auth-reducer";
-import { getIsLoginBollean, getUserEmail } from "../../redux/auth-selectors";
+import { setUserData } from "../../redux/auth-reducer";
 import { Login } from "./Login";
 import { Registration } from "./Registartion";
 
