@@ -1,6 +1,6 @@
 const SET_USER_DATA = "auth-reducer/SET_USER_DATA";
 const LOGOUT = "auth-reducer/LOGOUT";
-type InitialStateType = {
+export type InitialStateType = {
   email: null | string;
   password: null | string;
   isLogin: boolean;

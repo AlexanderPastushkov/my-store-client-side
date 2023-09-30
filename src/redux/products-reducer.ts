@@ -1,16 +1,16 @@
-import { Dispatch } from "redux";
-import { BrandsType, ProductsType } from "../Types/types";
-import { productsAPI } from "../api/api";
-import { AppStateType } from "../toolkitRedux/index.js";
-import { ThunkAction } from "redux-thunk";
-const SET_PRODUCTS = "products/SET_PRODUCTS";
-const SET_CAROUSEL_PRODUCTS = "products/SET_CAROUSEL_PRODUCTS";
-const SET_BRANDS = "products/SET_BRANDS";
+import { Dispatch } from 'redux';
+import { BrandsType, ProductsType } from '../Types/types';
+import { productsAPI } from '../api/api';
+import { AppStateType } from '../toolkitRedux/index.js';
+import { ThunkAction } from 'redux-thunk';
+const SET_PRODUCTS = 'products/SET_PRODUCTS';
+const SET_CAROUSEL_PRODUCTS = 'products/SET_CAROUSEL_PRODUCTS';
+const SET_BRANDS = 'products/SET_BRANDS';
 type CarouselProducts = {
   count: number;
   rows: Array<ProductsType>;
 };
-type InitialStateType = {
+export type InitialStateType = {
   products: Array<ProductsType>;
   carouselProducts: CarouselProducts | object;
   brands: Array<BrandsType>;
@@ -95,7 +95,6 @@ export const requestFilteredProducts = (value: string): ThunkType => {
 export const requestAllProducts = (): ThunkType => {
   return async (dispatch) => {
     let data = await productsAPI.getAllItems(); //axios.create -> we make request from DAL
-    console.log(data);
     dispatch(setCarouselProducts(data));
   };
 };
@@ -103,7 +102,6 @@ export const requestAllBrands = (): ThunkType => {
   return async (dispatch, getState) => {
     // let a = getState().productsPage.brands
     let data = await productsAPI.getAllBrands(); //axios.create -> we make request from DAL
-    console.log(data);
     dispatch(setBrands(data));
   };
 };
