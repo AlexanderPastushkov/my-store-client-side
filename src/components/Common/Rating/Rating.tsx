@@ -50,7 +50,7 @@ export const Rating: React.FC<Props> = ({ id, refreshRating }) => {
         {[...Array(5)].map((star, index) => {
           const currentRate = index + 1;
           return (
-            <div key={index}>
+            <div key={currentRate}>
               <label>
                 <input
                   className={s.inputStar}
