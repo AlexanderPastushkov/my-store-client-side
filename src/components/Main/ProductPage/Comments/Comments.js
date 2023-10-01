@@ -9,7 +9,7 @@ import s from "./CommentsForm.module.css";
 export const Comments = function Comments({ id }) {
   useEffect(() => {
     refreshComments();
-  }, []);
+  }, [id]);
 
   const refreshComments = () => {
     const fetchData = async (id) => {

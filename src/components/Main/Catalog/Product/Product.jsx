@@ -3,6 +3,7 @@ import { Image } from "../../../Common/Image/Image";
 import s from "./Product.module.css";
 import { useDispatch } from "react-redux";
 import { addProductToBasket } from "../../../../redux/basket-reducer";
+import { Rating } from "../../../Common/Rating/Rating";
 
 export default function Product({ product, onAdd }) {
   const { img, name, priceTotal, price, id, count } = product;

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const $host = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -8,14 +8,14 @@ const $authHost = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 
-const authInterceptor = (config) => {
-  config.headers.authorization = `Bearer ${localStorage.getItem("token")}`;
+const authInterceptor = (config: any) => {
+  config.headers.authorization = `Bearer ${localStorage.getItem('token')}`;
   return config;
 };
 $authHost.interceptors.request.use(authInterceptor);
 
 export const productsAPI = {
-  getFilteredItems(value) {
+  getFilteredItems(value: string) {
     if (value)
       return $host
         .get(`/api/product?name=${value}`)
@@ -23,10 +23,10 @@ export const productsAPI = {
         .then((data) => data);
   },
   getAllItems() {
-    return $host.get("/api/product").then((response) => response.data);
+    return $host.get('/api/product').then((response) => response.data);
   },
   getAllBrands() {
-    return $host.get("/api/brand").then((response) => response.data);
+    return $host.get('/api/brand').then((response) => response.data);
   },
 };
 

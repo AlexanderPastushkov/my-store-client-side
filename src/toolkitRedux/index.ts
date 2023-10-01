@@ -7,6 +7,7 @@ import { authReducer } from "../redux/auth-reducer";
 
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import ratingSlice from "./ratingSlice";
 
 const persistConfig = {
   key: "root",
@@ -20,11 +21,12 @@ const reducer = combineReducers({
   productsPage: productsReducer,
   basketPage: basketReducer,
   authPage: authReducer,
+  ratingPage: ratingSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 export const store = configureStore({
   reducer: persistedReducer,
 });
-
+export type AppDispatch = typeof store.dispatch;
 export const persistor = persistStore(store);

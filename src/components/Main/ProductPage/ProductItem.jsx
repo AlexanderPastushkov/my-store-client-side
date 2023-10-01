@@ -10,6 +10,7 @@ import { takeComments } from "../../../toolkitRedux/commentsSliceSelectors";
 import { setComments } from "../../../toolkitRedux/commentsSlice";
 import { useParams } from "react-router-dom";
 import { CommentsFormWithoutFormik } from "./Comments/CommentsFormWithoutFormik";
+import { Rating } from "../../Common/Rating/Rating";
 
 const ProductItem = () => {
   const [productItem, setProductItem] = useState({});
@@ -47,6 +48,9 @@ const ProductItem = () => {
             add to cart
           </button>
         </div>
+        {/* <div>
+          <Rating id={params.id} />
+        </div> */}
         <div className={s.image}>
           <Image img={img} name={name} />
         </div>
@@ -55,7 +59,6 @@ const ProductItem = () => {
         <div>
           <CommentsForm id={params.id} />
         </div>
-        <div>{/* <Comments id={params.id} /> */}</div>
       </>
     </div>
   );

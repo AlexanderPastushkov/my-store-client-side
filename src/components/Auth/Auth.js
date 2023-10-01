@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import {
   CATALOG_ROUTE,
   LOGIN_ROUTE,
@@ -8,7 +6,7 @@ import {
 
 import s from "./Auth.module.css";
 import { Field, Form, Formik } from "formik";
-import { NavLink, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { login, registration } from "../../api/userAPI";
 
 export const Auth = ({ setUserData, isLogin }) => {
