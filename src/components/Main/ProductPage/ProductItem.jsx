@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
-import { withRouter } from "../../../Hoc/withRouter"; //also we can use hook useParams from react-router-dom
-import { Image } from "../../Common/Image/Image";
-import s from "./ProductItem.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { addProductToBasket } from "../../../redux/basket-reducer";
-import { Comments } from "./Comments/Comments";
-import { CommentsForm } from "./Comments/CommentsForm";
-import { takeComments } from "../../../toolkitRedux/commentsSliceSelectors";
-import { setComments } from "../../../toolkitRedux/commentsSlice";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { CommentsFormWithoutFormik } from "./Comments/CommentsFormWithoutFormik";
-import { Rating } from "../../Common/Rating/Rating";
+import { addProductToBasket } from "../../../redux/basket-reducer";
+import { Image } from "../../Common/Image/Image";
+import { CommentsForm } from "./Comments/CommentsForm";
+import s from "./ProductItem.module.css";
 
 const ProductItem = () => {
   const [productItem, setProductItem] = useState({});

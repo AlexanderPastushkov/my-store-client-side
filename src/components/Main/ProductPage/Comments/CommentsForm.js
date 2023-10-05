@@ -83,6 +83,7 @@ export const CommentsForm = ({ id }) => {
                 onChange={(e) => setInputStr(e.target.value)}
               />
               <img
+                alt="img"
                 className={s.emojiIcon}
                 src="https://icons.getbootstrap.com/assets/icons/emoji-smile.svg"
                 onClick={() => setShowPicker((val) => !val)}

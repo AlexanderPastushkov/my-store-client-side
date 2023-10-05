@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import s from "./Rating.module.css";
-
 import { useAppSelector } from "../../../Hooks/reduxHooks";
 import { takeRating } from "../../../toolkitRedux/ratingSliceSelectors";
 import { getIsLoginBollean } from "../../../redux/auth-selectors";
 import { useNavigate } from "react-router-dom";
 import { createRating } from "../../../api/ratingAPI";
 import { LOGIN_ROUTE } from "../../../Utils/consts.js";
-
+import { v4 as uuidv4 } from "uuid";
 interface Props {
   id: number;
   refreshRating: () => void;
@@ -49,8 +48,9 @@ export const Rating: React.FC<Props> = ({ id, refreshRating }) => {
       <div className={s.starItems}>
         {[...Array(5)].map((star, index) => {
           const currentRate = index + 1;
+
           return (
-            <div key={currentRate}>
+            <div key={uuidv4()}>
               <label>
                 <input
                   className={s.inputStar}
