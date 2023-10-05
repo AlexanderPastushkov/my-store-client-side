@@ -12,6 +12,7 @@ import { takeComments } from "../../../../toolkitRedux/commentsSliceSelectors";
 import { setComments } from "../../../../toolkitRedux/commentsSlice";
 import { Rating } from "../../../Common/Rating/Rating";
 import { RatingContainer } from "../../../Common/Rating/RatingContainer";
+import { Button } from "../../../StyledComponents/Button";
 
 const commentsFormValidate = (values) => {
   const errors = {};
@@ -92,13 +93,14 @@ export const CommentsForm = ({ id }) => {
             </div>
 
             <div>
-              <button
-                className={s.submitButton}
+              <Button
+                backgroundColor="rgb(13, 125, 217)"
+                backgroundColorHover="rgb(1, 100, 181)"
                 type="submit"
                 disabled={isSubmitting}
               >
                 Add comment
-              </button>
+              </Button>
             </div>
           </Form>
         )}

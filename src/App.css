@@ -1,4 +1,4 @@
-* {
+/* * {
   padding: 0px;
   margin: 0px;
   border: 0px;
@@ -44,21 +44,22 @@ h5,
 h6 {
   font-weight: inherit;
   font-size: inherit;
-}
+} */
 
 /* ======================================================================= */
 
-.wrapper {
+/* .wrapper {
   margin: 0 auto;
   max-width: 1200px;
   display: flex;
   flex-direction: column;
   height: 100vh;
   color: var(--main-color);
-}
-.wrapper_content {
+  justify-content: space-between;
+} */
+/* .wrapper_content {
   background-color: var(--main-bgColor);
   color: var(--main-color);
   font-weight: bold;
   padding: 0 15px;
-}
+} */
