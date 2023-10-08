@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import s from "./Paginator.module.css";
+import { Button } from "../../StyledComponents/Button.js";
 
 type PropsType = {
   pageSize: number;
@@ -40,15 +41,14 @@ const Paginator: React.FC<PropsType> = ({
   return (
     <div className={s.pagination}>
       {portionNumber > 1 && (
-        <button
-          className={s.btn}
+        <Button
           onClick={() => {
             setPortionNumber(portionNumber - 1);
             onPageChanged(currentPage - 1);
           }}
         >
           PREV
-        </button>
+        </Button>
       )}
       {pages
         .filter(
@@ -66,15 +66,14 @@ const Paginator: React.FC<PropsType> = ({
           </span>
         ))}
       {portionCount > portionNumber && (
-        <button
-          className={s.btn}
+        <Button
           onClick={() => {
             setPortionNumber(portionNumber + 1);
             onPageChanged(currentPage + 1);
           }}
         >
           NEXT
-        </button>
+        </Button>
       )}
     </div>
   );

@@ -7,6 +7,7 @@ import {
   loginFormValidateEmail,
   loginFormValidatePassword,
 } from "../../Utils/commonFunctions";
+import { Button } from "../StyledComponents/Button";
 
 export const Login = ({ setUserData }) => {
   const navigateToRoute = useNavigate();
@@ -60,9 +61,15 @@ export const Login = ({ setUserData }) => {
                 {errors.password && touched.password && errors.password}
               </p>
             </div>
-            <button className={s.button} type="submit" disabled={isSubmitting}>
+            <Button
+              loginStyle
+              backgroundColor="#025cd3"
+              backgroundColorHover="#63c2fc"
+              type="submit"
+              disabled={isSubmitting}
+            >
               Login
-            </button>
+            </Button>
             <div>
               no account? <NavLink to={REGISTRATION_ROUTE}>register</NavLink>
             </div>

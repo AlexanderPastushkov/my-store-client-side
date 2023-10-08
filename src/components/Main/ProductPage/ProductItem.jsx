@@ -5,6 +5,7 @@ import { addProductToBasket } from "../../../redux/basket-reducer";
 import { Image } from "../../Common/Image/Image";
 import { CommentsForm } from "./Comments/CommentsForm";
 import s from "./ProductItem.module.css";
+import { Button } from "../../StyledComponents/Button";
 
 const ProductItem = () => {
   const [productItem, setProductItem] = useState({});
@@ -35,16 +36,10 @@ const ProductItem = () => {
           <div className={s.title}>{name}</div>
         </div>
         <div className={s.addButton}>
-          <button
-            onClick={() => dispatch(addProductToBasket(productItem))}
-            className={s.btn}
-          >
+          <Button onClick={() => dispatch(addProductToBasket(productItem))}>
             add to cart
-          </button>
+          </Button>
         </div>
-        {/* <div>
-          <Rating id={params.id} />
-        </div> */}
         <div className={s.image}>
           <Image img={img} name={name} />
         </div>

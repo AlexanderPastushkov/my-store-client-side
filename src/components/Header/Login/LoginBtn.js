@@ -3,6 +3,7 @@ import { LOGIN_ROUTE } from "../../../Utils/consts";
 import s from "./Login.module.css";
 // import "../../../css/common.css";
 import { useDispatch } from "react-redux";
+import { Button } from "../../StyledComponents/Button";
 
 export const LoginBtn = ({ isLogin, email, logout }) => {
   const dispatch = useDispatch();
@@ -18,12 +19,13 @@ export const LoginBtn = ({ isLogin, email, logout }) => {
             <span> {email}</span>
           </div>
           <div>
-            <button
-              className={s.logoutBtn}
+            <Button
+              backgroundColor="rgb(13, 125, 217)"
+              backgroundColorHover="rgb(1, 100, 181)"
               onClick={() => dispatch(logout(null, null, false))}
             >
               Log out
-            </button>
+            </Button>
           </div>
         </div>
       )}

@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { createRating } from "../../../api/ratingAPI";
 import { LOGIN_ROUTE } from "../../../Utils/consts.js";
 import { v4 as uuidv4 } from "uuid";
+import { Flex } from "../../StyledComponents/Flex.js";
+
 interface Props {
   id: number;
   refreshRating: () => void;
@@ -45,7 +47,7 @@ export const Rating: React.FC<Props> = ({ id, refreshRating }) => {
 
   return (
     <>
-      <div className={s.starItems}>
+      <Flex justify="center">
         {[...Array(5)].map((star, index) => {
           const currentRate = index + 1;
 
@@ -72,7 +74,7 @@ export const Rating: React.FC<Props> = ({ id, refreshRating }) => {
             </div>
           );
         })}
-      </div>
+      </Flex>
       {averageRate ? (
         <p>Your rating is {averageRate}</p>
       ) : (

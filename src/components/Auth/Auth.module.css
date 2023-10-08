@@ -21,21 +21,7 @@
   font-size: 16px;
   font-weight: 500;
 }
-.button {
-  margin-top: 50px;
-  width: 100%;
-  background-color: #025cd3;
-  color: #ffffff;
-  padding: 15px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 18px;
-  font-weight: 600;
-  transition: all 0.3s ease 0s;
-}
-.button:hover {
-  background-color: #63c2fc;
-}
+
 .field {
   display: block;
   height: 50px;

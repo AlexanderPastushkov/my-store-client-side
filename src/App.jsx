@@ -18,14 +18,30 @@ import Catalog from "./components/Main/Catalog/Catalog.jsx";
 import Home from "./components/Main/Home/Home.jsx";
 import ProductItem from "./components/Main/ProductPage/ProductItem";
 import { getItems } from "./redux/basket-selectors";
+import styled from "styled-components";
 
+const Wrapper = styled.div`
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  color: var(--main-color);
+`;
+
+const WrapperContent = styled.div`
+  background-color: var(--main-bgColor);
+  color: var(--main-color);
+  font-weight: bold;
+  padding: 0 15px;
+`;
 export function App() {
   const basketItems = useSelector(getItems);
 
   return (
-    <div className="wrapper">
+    <Wrapper>
       <Header countCartItems={basketItems.length} />
-      <div className="wrapper_content">
+      <WrapperContent>
         <Routes>
           <Route exact path="/" element={<Navigate to={HOME_ROUTE} />} />
           <Route path={HOME_ROUTE} element={<Home />} />
@@ -43,8 +59,8 @@ export function App() {
           </Route>
           <Route path="*" element={<div> 404 PAGE NOT FOUND</div>} />
         </Routes>
-      </div>
+      </WrapperContent>
       <Footer />
-    </div>
+    </Wrapper>
   );
 }

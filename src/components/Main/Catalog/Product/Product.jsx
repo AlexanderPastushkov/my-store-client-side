@@ -4,6 +4,7 @@ import s from "./Product.module.css";
 import { useDispatch } from "react-redux";
 import { addProductToBasket } from "../../../../redux/basket-reducer";
 import { Rating } from "../../../Common/Rating/Rating";
+import { Button } from "../../../StyledComponents/Button";
 
 export default function Product({ product, onAdd }) {
   const { img, name, priceTotal, price, id, count } = product;
@@ -21,12 +22,9 @@ export default function Product({ product, onAdd }) {
 
         <div className={s.price}>$ {price}</div>
         <div className={s.addbutton}>
-          <button
-            onClick={() => dispatch(addProductToBasket(product))}
-            className={s.btn}
-          >
+          <Button onClick={() => dispatch(addProductToBasket(product))}>
             add to cart
-          </button>
+          </Button>
         </div>
       </div>
     </section>
