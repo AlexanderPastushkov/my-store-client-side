@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .logoImg {
   width: 80px;
 }
@@ -21,4 +22,22 @@
   justify-content: center;
   margin-top: 25px;
   position: relative;
+}
+@media (max-width: 970px) {
+  .logo_links {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  .search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    position: relative;
+  }
 }
