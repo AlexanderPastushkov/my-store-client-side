@@ -1,8 +1,39 @@
-.footer {
+.footerItems {
   background-color: rgb(0, 112, 120);
   height: 150px;
-  text-align: center;
+}
+.links {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.active {
+  color: #36f4da;
+}
+.item {
+  color: #fff;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+
+.nav {
+}
+.links {
+  display: flex;
+  padding: 10px;
+  transition: all 0.3s ease 0s;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.links:hover .item {
+  color: #000000;
+}
+.links:hover .item:hover {
+  color: rgb(151, 218, 4);
+  box-shadow: 0 2px 0 0 currentColor;
+}
+.link {
+  list-style-type: none;
 }

@@ -7,6 +7,7 @@ import {
   CATALOG_ROUTE,
   HOME_ROUTE,
   LOGIN_ROUTE,
+  PRIVACY_ROUTE,
   PRODUCT_ROUTE,
   REGISTRATION_ROUTE,
 } from "./Utils/consts";
@@ -19,6 +20,7 @@ import Home from "./components/Main/Home/Home.jsx";
 import ProductItem from "./components/Main/ProductPage/ProductItem";
 import { getItems } from "./redux/basket-selectors";
 import { Wrapper, WrapperContent } from "./components/StyledComponents/Wrapper";
+import { Privacy } from "./components/Footer/Privacy/Privacy";
 
 export function App() {
   const basketItems = useSelector(getItems);
@@ -42,6 +44,7 @@ export function App() {
           <Route path={PRODUCT_ROUTE} element={<ProductItem />}>
             <Route path=":id" element={<ProductItem />} />
           </Route>
+          <Route path={PRIVACY_ROUTE} element={<Privacy />} />
           <Route path="*" element={<div> 404 PAGE NOT FOUND</div>} />
         </Routes>
       </WrapperContent>
