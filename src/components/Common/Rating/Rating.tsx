@@ -47,7 +47,7 @@ export const Rating: React.FC<Props> = ({ id, refreshRating }) => {
 
   return (
     <>
-      <Flex justify="center">
+      <Flex direction="row" justify="center">
         {[...Array(5)].map((star, index) => {
           const currentRate = index + 1;
 

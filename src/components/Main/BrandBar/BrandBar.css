@@ -30,3 +30,25 @@
 .brand-list li:hover {
   background-color: #1265b8;
 }
+@media (max-width: 970px) {
+  .brand-list li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .brand-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 7px;
+    justify-content: center;
+    justify-items: center;
+  }
+}
+@media (max-width: 767px) {
+  .brand-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    justify-content: center;
+    justify-items: center;
+  }
+}

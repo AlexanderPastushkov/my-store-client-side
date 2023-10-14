@@ -34,29 +34,12 @@
   background-color: #b7f5ff;
   border-radius: 5px;
 }
-@media (max-width: 767px) {
-  .findForm {
-    display: flex;
-    margin: 10px;
-    padding: 10px;
-    align-items: center;
-    justify-content: center;
-  }
-}
-@media (max-width: 500px) {
-  .findForm {
-    margin: 5px;
-    padding: 5px;
-  }
-  .form {
-    display: block;
-  }
-}
+
 .emojiIcon {
   cursor: pointer;
   position: absolute;
   top: 7px;
-  right: 65px;
+  right: 75px;
   z-index: 10;
 }
 .pickerContainer {
@@ -85,4 +68,24 @@
   border: 1px solid #333;
   padding: var(--btnPadding);
   border-radius: var(--borderRadius);
+}
+@media (max-width: 768px) {
+  .findForm {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  .submitButton {
+    padding: 5px;
+    width: 50px;
+    border-radius: 5px;
+    margin-left: 5px;
+  }
 }

@@ -11,7 +11,7 @@ export default function Catalog({ onAdd }) {
     data: [],
     total: 0,
     page: 1,
-    pageSize: 2,
+    pageSize: 4,
   });
   const { id } = useParams();
 

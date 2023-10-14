@@ -32,3 +32,19 @@
 .addButton {
   margin-right: 10px;
 }
+
+@media (max-width: 767px) {
+  .image {
+    max-width: 300px;
+    max-height: 300px;
+  }
+  .addButton {
+    margin-right: 5px;
+  }
+  .productInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-right: 5px;
+  }
+}
