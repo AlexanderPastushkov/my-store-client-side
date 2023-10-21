@@ -1,18 +1,20 @@
-import { Field, Form, Formik } from "formik";
-import React, { useState } from "react";
-import s from "./CommentsForm.module.css";
-import { createComment } from "../../../../api/commentsAPI";
-import { LOGIN_ROUTE } from "../../../../Utils/consts";
-import { useDispatch, useSelector } from "react-redux";
-import { getIsLoginBollean } from "../../../../redux/auth-selectors";
-import { useNavigate } from "react-router-dom";
-import { Comments } from "./Comments";
+import { useMutation, useQuery } from "@apollo/client";
 import EmojiPicker from "emoji-picker-react";
-import { takeComments } from "../../../../toolkitRedux/commentsSliceSelectors";
-import { setComments } from "../../../../toolkitRedux/commentsSlice";
-import { Rating } from "../../../Common/Rating/Rating";
+import { Field, Form, Formik } from "formik";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { LOGIN_ROUTE } from "../../../../Utils/consts";
+import {
+  CREATE_COMMENT,
+  GET_PRODUCT_COMMENTS,
+} from "../../../../api/QueryGQL/comment";
+import { getIsLoginBollean } from "../../../../redux/auth-selectors";
+import { setComment } from "../../../../toolkitRedux/commentsSlice";
 import { RatingContainer } from "../../../Common/Rating/RatingContainer";
 import { Button } from "../../../StyledComponents/Button";
+import { Comments } from "./Comments";
+import s from "./CommentsForm.module.css";
 
 const commentsFormValidate = (values) => {
   const errors = {};
@@ -23,15 +25,22 @@ export const CommentsForm = ({ id }) => {
   const [inputStr, setInputStr] = useState("");
   const [titleStr, setTitleStr] = useState("");
   const [showPicker, setShowPicker] = useState(false);
-
-  const refreshComments = () => {
-    const fetchData = async (id) => {
-      const response = await fetch(`/api/reviews/${id}`);
-      const json = await response.json();
-
-      dispatch(setComments(json));
-    };
-    fetchData(id);
+  const { data, loading, error, refetch } = useQuery(GET_PRODUCT_COMMENTS, {
+    variables: {
+      productID: Number(id),
+    },
+  });
+  const [newComment] = useMutation(CREATE_COMMENT);
+  const addComment = () => {
+    newComment({
+      variables: {
+        input: {
+          title: titleStr,
+          description: inputStr,
+          productID: Number(id),
+        },
+      },
+    }).then((data) => dispatch(setComment(data)));
   };
 
   const onEmojiClick = (emojiData, event) => {
@@ -42,12 +51,12 @@ export const CommentsForm = ({ id }) => {
   const dispatch = useDispatch();
   const navigateToRoute = useNavigate();
   const isLogin = useSelector(getIsLoginBollean);
-  const submit = async (values, { setSubmitting }) => {
-    if (isLogin) {
-      await createComment(titleStr, inputStr, id);
 
+  const submit = (values, { setSubmitting }) => {
+    if (isLogin) {
+      addComment();
       setSubmitting(false);
-      refreshComments();
+      refetch();
       setInputStr("");
       setTitleStr("");
     } else {
@@ -94,8 +103,8 @@ export const CommentsForm = ({ id }) => {
 
             <div>
               <Button
-                backgroundColor="rgb(13, 125, 217)"
-                backgroundColorHover="rgb(1, 100, 181)"
+                backgroundcolor="rgb(13, 125, 217)"
+                backgroundcolorhover="rgb(1, 100, 181)"
                 type="submit"
                 disabled={isSubmitting}
               >
@@ -106,7 +115,7 @@ export const CommentsForm = ({ id }) => {
         )}
       </Formik>
       <RatingContainer id={id} />
-      <Comments id={id} />
+      <Comments data={data} loading={loading} id={id} />
     </div>
   );
 };
