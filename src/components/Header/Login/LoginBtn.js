@@ -20,8 +20,8 @@ export const LoginBtn = ({ isLogin, email, logout }) => {
           </div>
           <div>
             <Button
-              backgroundcolor="rgb(13, 125, 217)"
-              backgroundcolorhover="rgb(1, 100, 181)"
+              backgroundColor="rgb(13, 125, 217)"
+              backgroundColorHover="rgb(1, 100, 181)"
               onClick={() => dispatch(logout(null, null, false))}
             >
               Log out

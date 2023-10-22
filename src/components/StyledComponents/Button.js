@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const StyledButton = styled.button`
-  background-color: ${(props) => props.backgroundcolor || "#08836d"};
+  background-color: ${(props) => props.backgroundColor || "#08836d"};
   padding: 8px;
   border: none;
   cursor: pointer;
@@ -11,7 +11,7 @@ const StyledButton = styled.button`
   border-radius: 5px;
   align-self: ${(props) => props.align || "stretch"};
   &:hover {
-    background-color: ${(props) => props.backgroundcolorhover || "#03725e"};
+    background-color: ${(props) => props.backgroundColorHover || "#03725e"};
   }
   ${(
     props //styles extension -- for login/registration button

@@ -5,16 +5,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LOGIN_ROUTE } from "../../../../Utils/consts";
-import {
-  CREATE_COMMENT,
-  GET_PRODUCT_COMMENTS,
-} from "../../../../api/QueryGQL/comment";
+import { CREATE_COMMENT } from "../../../../api/QueryGQL/comment";
 import { getIsLoginBollean } from "../../../../redux/auth-selectors";
 import { setComment } from "../../../../toolkitRedux/commentsSlice";
 import { RatingContainer } from "../../../Common/Rating/RatingContainer";
 import { Button } from "../../../StyledComponents/Button";
 import { Comments } from "./Comments";
 import s from "./CommentsForm.module.css";
+import { useCommentsQuery } from "../../../../Hooks/useQuery";
 
 const commentsFormValidate = (values) => {
   const errors = {};
@@ -25,14 +23,10 @@ export const CommentsForm = ({ id }) => {
   const [inputStr, setInputStr] = useState("");
   const [titleStr, setTitleStr] = useState("");
   const [showPicker, setShowPicker] = useState(false);
-  const { data, loading, error, refetch } = useQuery(GET_PRODUCT_COMMENTS, {
-    variables: {
-      productID: Number(id),
-    },
-  });
-  const [newComment] = useMutation(CREATE_COMMENT);
+  const { data, loading, error, refetch } = useCommentsQuery(id);
+  const [createNewComment] = useMutation(CREATE_COMMENT);
   const addComment = () => {
-    newComment({
+    createNewComment({
       variables: {
         input: {
           title: titleStr,

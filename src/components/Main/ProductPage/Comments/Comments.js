@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import s from "./CommentsForm.module.css";
 
-export const Comments = function Comments({ id, data, loading }) {
+export const Comments = function Comments({ data, loading }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
