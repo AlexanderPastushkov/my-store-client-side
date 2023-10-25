@@ -9,7 +9,10 @@ const commentsSlice = createSlice({
     setComments(state, action) {
       state.comments = action.payload;
     },
+    setComment(state, action) {
+      state.comments.push(action.payload);
+    },
   },
 });
-export const { setComments } = commentsSlice.actions; //export actions
+export const { setComments, setComment } = commentsSlice.actions; //export actions
 export default commentsSlice.reducer;
